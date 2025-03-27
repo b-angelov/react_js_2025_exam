@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;800&display=swap");
-body {
+.calendar_holder {
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -8,18 +8,18 @@ body {
   background: radial-gradient(circle, #eeaeca 0%, #94bbe9 100%);
 }
 
-h1 {
+.calendar_holder h1 {
   font-weight: 800;
   margin: 1rem 0 0;
 }
 
-ul {
+.calendar_holder ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   flex-wrap: wrap;
   list-style: none;
 }
-ul li {
+.calendar_holder ul li {
   display: flex;
   width: 10rem;
   height: 10rem;
@@ -37,14 +37,14 @@ ul li {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
-ul li time {
+.calendar_holder ul li time {
   font-size: 2rem;
   margin: 0 0 1rem 0;
   font-weight: 500;
 }
-ul .today {
+.calendar_holder ul .today {
   background: #ffffff70;
 }
-ul .today time {
+.calendar_holder ul .today time {
   font-weight: 800;
 }
