@@ -37,7 +37,7 @@ jobs:
             cd ${{secrets.VPS_PROJECT_PATH}}
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-            nvm use 19 || nvm install 19
+            nvm use 20 || nvm install 20
             git config core.sshCommand "ssh -i ${{secrets.DEPLOY_KEY_PATH}} -o IdentitiesOnly=yes"
             git pull origin master
             npm install
