@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load static %}
+{% load markdown %}
+
+<section class="single-article">
+    <article>
+        <figure>
+            {% if article.image %}
+                <img src="{{ article.image.url }}" alt="{{ article.title }}">
+            {% else %}
+                <img src="{% static 'images/articles/saint.webp' %}" alt="{% translate 'no image found' %}">
+            {% endif %} 
+        </figure>
+        <main>
+            <h2>{{ article.title|capfirst }}</h2>
+            <p>{{ article.content|capfirst|markdown }}</p>
+                <nav>
+                    <ul>
+                        {% if article.is_own %}
+                            <li><a href="{% url "article-delete" article.pk %}">
+                                
+                            </a></li>
+                        {% endif %} 
+                        {% if article.can_change or article.is_own %}
+                            <li><a href="{% url "article-edit" article.pk %}">
+                                
+                            </a></li>
+                        {% endif %} 
+                    </ul>
+                </nav>
+        
+            
+        </main>
+    </article>
+</section>

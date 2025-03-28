@@ -1,0 +1,59 @@
+{% load static %}
+{% load i18n %}
+<p>{% translate 'tiled articles preview'|capfirst %}</p>
+<section class="article-list">
+        {% for article in articles %}
+        <article onclick="window.location.href='{{ article.article_url }}';">
+                <figure>
+                        {% if article.image %}
+                            <img src="{{ article.image.url }}" alt="{{ article.title }}">
+                        {% else %}
+                            <img src="{% static 'images/articles/saint.webp' %}" alt="{% translate 'no image found' %}">
+                        {% endif %}
+                </figure>
+                <main>
+                    <h2>{{ article.title|capfirst }}</h2>
+                    <p>{{ article.content|truncatewords:5|capfirst }}</p>
+                        <nav>
+                            <ul>
+                                {% if article.is_own %}
+                                    <li><a href="{% url "article-delete" article.pk %}">
+                                        
+                                    </a></li>
+                                {% endif %} 
+                                {% if article.can_change or article.is_own %}
+                                    <li><a href="{% url "article-edit" article.pk %}">
+                                        
+                                    </a></li>
+                                {% endif %} 
+                            </ul>
+                        </nav>
+                    
+                </main>
+                
+        </article>
+            
+        {% endfor %}
+        {% if not articles %}
+        <article>
+            <figure>
+                <img src="{% static 'images/articles/saint.webp' %}" alt="{% translate 'no tiles found' %}">
+            </figure>
+            <main>
+                <h2>{% translate 'no tiles'|capfirst %} {{ for_this_day }}</h2>
+                <p>{% translate 'no articles are added yet'|capfirst %} {{ for_this_day }}</p>
+            </main>
+        </article>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <article class="new-article-tile" onclick="(e=>window.location.href = '{% url "article-create" %}')();">
+            <figure>
+                <img src="{% static 'images/articles/saint.webp' %}" alt="{% translate 'no tiles found' %}">
+            </figure>
+            <main>
+                <h2>{% translate 'add new tile'|capfirst %}</h2>
+                <p class="new-article-sign"> + </p>
+            </main>
+        </article>
+        {% endif %} 
+</section>

@@ -2,27 +2,31 @@ import calendar_styles from "/src/assets/calendar/css/calendar.module.css"
 import ListItem from "./ListItem.jsx";
 import {useContext, useEffect, useState} from "react";
 import CalendarContext from "../../contexts/CalendarContext.js";
-import {get} from "../../assets/calendar/API/calendar_fetchery.js";
 import {getMonthMatrix} from "../../assets/calendar/utils/month.js";
 import {useIntl} from "react-intl";
+import useAPI from "../../hooks/useAPI.js";
 
 export default function Calendar(){
 
     const [calendarItems, setCalendarItems] = useState([])
     const intl = useIntl()
     const date = new Date();
+    const {apiMethods, apiLoaded} = useAPI()
+    const {get} = apiMethods
 
     useEffect(() => {
-        get("holidays", {by_month: date.getMonth() + 1 , year: date.getFullYear()})
-            .then(res=> {
-                let items = getMonthMatrix(res, intl.locale)
-                items = items[Math.floor(date.getDate() /  7)]
-                items = setCalendarItems(items.map(item => (<ListItem {...item} />)))
-                console.log(getMonthMatrix(res))
-                return items
-            })
-            .catch(error => console.error(error))
-    },[])
+        if(apiLoaded) {
+            get("holidays", {by_month: date.getMonth() + 1, year: date.getFullYear()})
+                .then(res => {
+                    let items = getMonthMatrix(res, intl.locale)
+                    items = items[Math.floor(date.getDate() / 7)]
+                    items = setCalendarItems(items.map(item => (<ListItem {...item} />)))
+                    console.log(getMonthMatrix(res))
+                    return items
+                })
+                .catch(error => console.error(error))
+        }
+    },[apiLoaded])
 
     return (
         <CalendarContext.Provider value={{
