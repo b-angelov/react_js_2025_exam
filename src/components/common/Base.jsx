@@ -3,11 +3,9 @@ import ExternalStyle from "./ExternalStyle.jsx";
 
 
 export default function Base(){
-
+    import(`../../assets/css/main.css`);
     return (
         <>
-            <ExternalStyle url={`/assets/css/main.css`}/>
-            <ExternalStyle url={`./src/assets/css/main.css`}/>
             <ExternalStyle url={`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`}/>
             {/*!--{# here you can add planet image container if you'd like#}--*/}
             <div id="container">
