@@ -1,10 +1,12 @@
 import Calendar from "../calendar/Calendar.jsx";
+import ExternalStyle from "./ExternalStyle.jsx";
 
 
-export default function Base() {
+export default function Base(){
 
     return (
         <>
+            <ExternalStyle url={`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`}/>
             {/*!--{# here you can add planet image container if you'd like#}--*/}
             <div id="container">
                 <div id="container-top-border">

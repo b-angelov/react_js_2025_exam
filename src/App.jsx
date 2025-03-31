@@ -9,7 +9,6 @@ function App() {
       return (
         <IntlProvider locale={browserLocale}>
             <Base />
-            <article style={{minHeight: "50vh"}}> SOmething Here</article>
         </IntlProvider>
       )
 }
