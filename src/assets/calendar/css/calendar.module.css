@@ -21,8 +21,8 @@
 }
 .calendar_holder ul li {
   display: flex;
-  width: 10rem;
-  height: 10rem;
+  width: 7rem;
+  height: 7rem;
   margin: 0.25rem;
   flex-flow: column;
   border-radius: 0.2rem;
