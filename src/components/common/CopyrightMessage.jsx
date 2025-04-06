@@ -1,8 +1,9 @@
+import punycode from "punycode";
 
 export default function CopyrightMessage() {
 
     const fullYear = new Date().getFullYear();
-    const location = window.location;
+    const location = punycode.toUnicode(window.location.toString());
 
     return (
         <div id="copyright">
