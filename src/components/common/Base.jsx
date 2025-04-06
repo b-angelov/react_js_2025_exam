@@ -1,5 +1,6 @@
 import Calendar from "../calendar/Calendar.jsx";
 import ExternalStyle from "./ExternalStyle.jsx";
+import CopyrightMessage from "./CopyrightMessage.jsx";
 
 
 export default function Base(){
@@ -179,6 +180,7 @@ export default function Base(){
                         </div>
 
                         <div id="footer">
+                            <CopyrightMessage/>
                             {/*<!--{ % block footer_content %}
 
                             {% endblock %}
