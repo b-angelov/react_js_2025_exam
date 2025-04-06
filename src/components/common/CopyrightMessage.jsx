@@ -15,5 +15,5 @@ export default function CopyrightMessage() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
