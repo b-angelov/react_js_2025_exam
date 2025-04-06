@@ -15,6 +15,6 @@ export default function ListItem(props){
 
     let date = new Date(props.date)
     return (
-        <li><time dateTime={date} className={"today"}>{date.getDate()}</time>{feastsAndSaints()}</li>
+        <li><time dateTime={date} className={"today"}>{date.getDate() || ""}</time>{feastsAndSaints()}</li>
     )
 }
