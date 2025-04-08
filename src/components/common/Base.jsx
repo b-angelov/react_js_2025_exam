@@ -1,13 +1,18 @@
 import Calendar from "../calendar/Calendar.jsx";
 import ExternalStyle from "./ExternalStyle.jsx";
 import CopyrightMessage from "./CopyrightMessage.jsx";
+import useExternalStyles from "../../hooks/useExternalStyles.js";
+import useOrderedStyles from "../../hooks/useOrderedStyles.js";
 
 
 export default function Base(){
-    import(`../../assets/css/main.css`);
+    // import(`../../assets/css/main.css`);
+    const {addStyle,addExternalStyle} = useOrderedStyles();
+    addStyle(`/src/assets/css/main.css`,'main')
+    addExternalStyle(`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`)
     return (
         <>
-            <ExternalStyle url={`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`}/>
+            {/*<ExternalStyle url={`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`}/>*/}
             {/*!--{# here you can add planet image container if you'd like#}--*/}
             <div id="container">
                 <div id="container-top-border">
