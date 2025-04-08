@@ -7,7 +7,7 @@ import useOrderedStyles from "../../hooks/useOrderedStyles.js";
 export default function CopyrightMessage() {
 
     const {addStyle,loadedStyles} = useOrderedStyles()
-    addStyle(`/src/assets/css/common/copyright.module.css`,'copyright')
+    addStyle(`/common/copyright.module.css`,'copyright')
     const [styles,setStyles] = useState({})
 
     useEffect(()=>{

@@ -4,6 +4,7 @@ import useExternalStyles from "./useExternalStyles.js";
 export default function useOrderedStyles() {
     const [stylesToLoad, setStylesToLoad] = useState({});
     const [loadedStyles, setLoadedStyles] = useState({});
+    const assets = import.meta.glob('../assets/css/**/*');
 
     const {addStyle,setLoadStyles} = useExternalStyles()
 
@@ -11,7 +12,9 @@ export default function useOrderedStyles() {
     useEffect(() => {
         (async () => {
             for (const [name, style] of Object.entries(stylesToLoad)) {
-                const styleData = await import(style);
+                const path = `../assets/css${style}`;
+                const importAssets = assets[path];
+                const styleData = await importAssets();
                 setLoadedStyles((prevStyles) => ({
                     ...prevStyles,
                     [name]: styleData,

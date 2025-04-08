@@ -8,7 +8,7 @@ import useOrderedStyles from "../../hooks/useOrderedStyles.js";
 export default function Base(){
     // import(`../../assets/css/main.css`);
     const {addStyle,addExternalStyle} = useOrderedStyles();
-    addStyle(`/src/assets/css/main.css`,'main')
+    addStyle(`/main.css`,'main')
     addExternalStyle(`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`)
     return (
         <>
