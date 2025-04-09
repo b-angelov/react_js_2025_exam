@@ -19,7 +19,8 @@ export default function Logout() {
         (async () =>{
             navigate(routes["login-page"])
             await logout()
-            reloadPage("home")})();
+            // reloadPage("home")}
+        )();
     },[apiLoaded])
 
     return (<></>)

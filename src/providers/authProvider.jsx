@@ -6,7 +6,7 @@ const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
     const [apiLoaded, setApiLoaded] = useState(false);
 
-    // Create the axios instance
+
     const api = useMemo(() => {
         return axios.create({
             baseURL: import.meta.env.VITE_API_ADDRESS,
@@ -18,7 +18,6 @@ const AuthProvider = ({ children }) => {
         });
     }, []);
 
-    // Update the authorization header when token changes
     useEffect(() => {
         console.log("Token changed:", token);
 
@@ -30,7 +29,6 @@ const AuthProvider = ({ children }) => {
             console.log("Authorization header removed");
         }
 
-        // Toggle apiLoaded to trigger component updates
         setApiLoaded(prev => !prev);
     }, [token, api]);
 
