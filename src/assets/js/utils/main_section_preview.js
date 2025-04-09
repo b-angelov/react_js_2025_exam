@@ -24,4 +24,10 @@ export default function mainSectionToggle(){
     }else{
         section.classList.add('disable-preview')
     }
+
+    const observer = new MutationObserver(mainSectionToggle);
+    observer.observe(section, {
+        childList: true,
+        subtree: true
+    })
 }

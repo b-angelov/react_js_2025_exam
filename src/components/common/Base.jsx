@@ -3,13 +3,16 @@ import ExternalStyle from "./ExternalStyle.jsx";
 import CopyrightMessage from "./CopyrightMessage.jsx";
 import useExternalStyles from "../../hooks/useExternalStyles.js";
 import useOrderedStyles from "../../hooks/useOrderedStyles.js";
+import Nav from "../navigation/Nav.jsx";
+import {Outlet} from "react-router-dom";
 
 
 export default function Base(){
-    // import(`../../assets/css/main.css`);
+
     const {addStyle,addExternalStyle} = useOrderedStyles();
     addStyle(`/main.css`,'main')
     addExternalStyle(`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`)
+
     return (
         <>
             {/*<ExternalStyle url={`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`}/>*/}
@@ -63,6 +66,7 @@ export default function Base(){
 
                                     <td className="pill_m">
                                         <div className="" id="use3">
+                                            <Nav/>
                                             {/*<!--{ % nav_render 'navigation/nav.html' 'main-menu' user %}
                                             {% block use3_content %}
 
@@ -164,8 +168,8 @@ export default function Base(){
                                     {% endblock %}-->*/}
                                     </div>
 
-                                    <div className="component-wrapper">
-                                        <Calendar />
+                                    <div className={`component-wrapper`} >
+                                        <Outlet/>
                                         {/*<!--{ % block main_content %}
 
                                         {% endblock %}-->*/}
