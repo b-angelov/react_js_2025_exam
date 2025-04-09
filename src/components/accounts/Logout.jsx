@@ -16,11 +16,11 @@ export default function Logout() {
     const {apiLoaded} = useApi()
 
     useEffect(()=> {
-        (async () =>{
+        (async () => {
             navigate(routes["login-page"])
             await logout()
-            // reloadPage("home")}
-        )();
+            reloadPage("home")
+        })();
     },[apiLoaded])
 
     return (<></>)
