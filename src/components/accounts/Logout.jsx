@@ -17,9 +17,9 @@ export default function Logout() {
 
     useEffect(()=> {
         (async () => {
-            navigate(routes["login-page"])
             await logout()
-            reloadPage("home")
+            // navigate(routes["login-page"])
+            // reloadPage("home")
         })();
     },[apiLoaded])
 
