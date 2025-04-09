@@ -1,9 +1,13 @@
 import {useEffect, useState} from "react";
+import axios from "axios";
+import useAuth from "./useAuth.js";
 
 function useAPI(){
 
     const [apiMethods,setApiMethods] = useState({})
     const [apiLoaded, setApiLoaded] = useState(false)
+    const {context} = useAuth()
+    const api = context.api
 
     const apiAddress = import.meta.env.VITE_API_ADDRESS;
 
@@ -20,7 +24,8 @@ function useAPI(){
 
     async function loadNavFiles(menu_name="main-menu", language="bg"){
         try{
-            return await fetch(`${apiAddress}navigation/${menu_name}/api/?lang=${language}`)
+            console.log(api)
+            return await api.get(`${apiAddress}navigation/${menu_name}/api/?lang=${language}`)
         } catch{
             console.log("Failed to fetch navigation files")
         }

@@ -4,14 +4,14 @@ import routes from "../../routes/routes.js";
 export default function NavItem(props) {
     const {item} = props;
     const lnk = item.url_internal ? (
-        <NavLink to={routes[item.url_internal]} className="dropdown-toggle" dataToggle="dropdown"
-              role="button" ariaHaspopup="true"
-              ariaExpanded="false" style={{"text-transform": "capitalize", cursor:"pointer"}}>{item.item_name} <span
+        <NavLink to={routes[item.url_internal]} className="dropdown-toggle" data-toggle="dropdown"
+              role="button" aria-haspopup="true"
+              aria-expanded="false" style={{"text-transform": "capitalize", cursor:"pointer"}}>{item.item_name} <span
             className="caret"></span></NavLink>
     ) : (
-        <a href={item.url_external} className="dropdown-toggle" dataToggle="dropdown"
-           role="button" ariaHaspopup="true"
-           ariaExpanded="false" style={{"text-transform": "capitalize", cursor:"pointer"}}>{item.item_name} <span
+        <a href={item.url_external} className="dropdown-toggle" data-toggle="dropdown"
+           role="button" aria-haspopup="true"
+           aria-expanded="false" style={{"text-transform": "capitalize", cursor:"pointer"}}>{item.item_name} <span
             className="caret"></span></a>
     )
 

@@ -5,13 +5,26 @@ import useExternalStyles from "../../hooks/useExternalStyles.js";
 import useOrderedStyles from "../../hooks/useOrderedStyles.js";
 import Nav from "../navigation/Nav.jsx";
 import {Outlet} from "react-router-dom";
+import useAuth from "../../hooks/useAuth.js";
+import {useEffect, useState} from "react";
+import useReload from "../../hooks/useReload.js";
 
 
 export default function Base(){
 
+    const {reload,setReload} = useState(false)
+    const {setReloadPage} = useReload()
     const {addStyle,addExternalStyle} = useOrderedStyles();
     addStyle(`/main.css`,'main')
     addExternalStyle(`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`)
+    const {context} = useAuth()
+    const reloadCallback = ()=> setReload(!reload)
+
+
+
+    useEffect(() => {
+        setReloadPage("home", reloadCallback)
+    }, []);
 
     return (
         <>
