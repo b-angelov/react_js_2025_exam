@@ -9,7 +9,7 @@ export default function ArticleTile(props) {
             <article onClick={() => navigate(routes["article-detail"].replace(":id", id))}>
                 <figure>
                     {!!image && (<img src={image} alt={title}/>)}
-                    {!image && (<img src={'/src/assets/images/articles/saint.webp'} alt="няма изображение"/>)}
+                    {!image && (<img src={'./src/assets/images/articles/saint.webp'} alt="няма изображение"/>)}
 
                 </figure>
                 <main>

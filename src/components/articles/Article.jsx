@@ -33,7 +33,7 @@ export default function Article(props) {
                 <article>
                     <figure>
                         {!!article.image && (<img src={article.image} alt={article.title}/>)}
-                        {!article.image && (<img src={'/src/assets/images/articles/saint.webp'} alt="няма изображение"/>)}
+                        {!article.image && (<img src={'./src/assets/images/articles/saint.webp'} alt="няма изображение"/>)}
                     </figure>
                     <main>
                         <h2>{article.title}</h2>

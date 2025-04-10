@@ -39,7 +39,7 @@ export default function Articles(props) {
             <>
                 <article className="new-article-tile" onClick={() => navigate(routes["article-create"])}>
                     <figure>
-                        <img src={'/src/assets/images/articles/saint.webp'} alt={"няма намерени картички"}/>
+                        <img src={'./src/assets/images/articles/saint.webp'} alt={"няма намерени картички"}/>
                     </figure>
                     <main>
                         <h2 style={{textTransform: "capitalize"}}>добави картичка</h2>
@@ -62,7 +62,7 @@ export default function Articles(props) {
         <>
             <article>
                 <figure>
-                    <img src={'/src/assets/images/articles/saint.webp'} alt={"няма намерени картички"}/>
+                    <img src={'./src/assets/images/articles/saint.webp'} alt={"няма намерени картички"}/>
                 </figure>
                 <main>
                     <h2 style={{textTransform: "capitalize"}}>Няма картички за този ден</h2>
