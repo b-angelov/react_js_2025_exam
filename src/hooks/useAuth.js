@@ -75,7 +75,7 @@ export default function useAuth()  {
     }
 
     const logout = async () => {
-        setToken(null);
+        await setToken(null);
     }
 
     return {context, login, logout};
