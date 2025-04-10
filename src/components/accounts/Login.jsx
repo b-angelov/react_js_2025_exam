@@ -17,7 +17,6 @@ export default function Login() {
     const loginSubmitHandler = ({username, password}) =>{
         (async ()=> {
             const logged = await login(username, password)
-            console.log(logged)
             if (logged?.status === 200){
                 navigate(routes["home"])
             }else{

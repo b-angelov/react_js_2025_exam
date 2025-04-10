@@ -19,14 +19,11 @@ const AuthProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        console.log("Token changed:", token);
 
         if (token) {
             api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-            console.log("Authorization header set:", api.defaults.headers.common["Authorization"]);
         } else {
             delete api.defaults.headers.common["Authorization"];
-            console.log("Authorization header removed");
         }
 
         setApiLoaded(prev => !prev);

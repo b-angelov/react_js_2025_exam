@@ -24,18 +24,13 @@ function useAPI(){
 
     async function loadNavFiles(menu_name="main-menu", language="bg"){
         try{
-            console.log(api)
             return await api.get(`${apiAddress}navigation/${menu_name}/api/?lang=${language}`)
         } catch{
             console.log("Failed to fetch navigation files")
         }
     }
 
-    useEffect(()=>{
-        loadApiFiles()
-    },[])
-
-    return {apiMethods, apiLoaded, loadNavFiles}
+    return {apiMethods, apiLoaded, loadNavFiles, loadApiFiles}
 
 }
 

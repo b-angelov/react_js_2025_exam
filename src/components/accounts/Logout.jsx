@@ -7,7 +7,6 @@ import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
 export default function Logout() {
-    console.log("logging out")
 
     const {logout} = useAuth()
     const {loadNavFiles} = useApi()

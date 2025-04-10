@@ -19,16 +19,13 @@ export default function Nav(){
 
 
     useEffect(() => {
-        console.log("Token in Nav:", token);
         (async () =>{
             const menu_name = "main-menu";
             const language = "bg";
             try {
                 const response = await loadNavFiles(menu_name, language);
-                console.log(response)
                 if (response.status === 200) {
                     // const data = await response.json();
-                    console.log(response.data);
                     setNavData(response.data);
                 }
             } catch (error) {

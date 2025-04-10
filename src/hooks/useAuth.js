@@ -32,7 +32,6 @@ export default function useAuth()  {
             // });
             response = api.post(`/api/token/`,{username,password}).
             then(response=>{
-                console.log("Response from API:", response)
                 setToken(response.data.access);
                 return {status: 200, data: response};
             }).catch((error) => {
@@ -62,7 +61,6 @@ export default function useAuth()  {
             // })
             response = api.post(`/api/token/refresh/`).
             then(response=>{
-                console.log("Response from API:", response)
                 setToken(response.data.access);
                 return {status: 200, data: response};
             }).catch((error) => {

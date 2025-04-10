@@ -8,12 +8,14 @@ import {Outlet} from "react-router-dom";
 import useAuth from "../../hooks/useAuth.js";
 import {useEffect, useState} from "react";
 import useReload from "../../hooks/useReload.js";
+import useAPI from "../../hooks/useAPI.js";
 
 
 export default function Base(){
 
     const {reload,setReload} = useState(false)
     const {setReloadPage} = useReload()
+    const {loadApiFiles} = useAPI()
     const {addStyle,addExternalStyle} = useOrderedStyles();
     addStyle(`/main.css`,'main')
     addExternalStyle(`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`)
@@ -24,6 +26,7 @@ export default function Base(){
 
     useEffect(() => {
         setReloadPage("home", reloadCallback)
+        loadApiFiles()
     }, []);
 
     return (
