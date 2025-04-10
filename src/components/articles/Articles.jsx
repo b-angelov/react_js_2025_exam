@@ -51,7 +51,7 @@ export default function Articles(props) {
         )
     }
 
-    final.push( articles ? (
+    final.push( articles.length ? (
         <>
             <p style={{"textTransform": "capitalize"}}>Преглед на картички от статиите</p>
             <section className="article-list">
@@ -61,6 +61,7 @@ export default function Articles(props) {
         </>
     ) : (
         <>
+            <section className="article-list">
             <article>
                 <figure>
                     <img src={saintImage} alt={"няма намерени картички"}/>
@@ -70,6 +71,7 @@ export default function Articles(props) {
                     <p>Все още няма добавени картички за този ден</p>
                 </main>
             </article>
+            </section>
         </>
     ))
 
