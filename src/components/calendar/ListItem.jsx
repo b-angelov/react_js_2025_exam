@@ -2,11 +2,11 @@ export default function ListItem(props){
     const {saint,feast,week_day} = props
 
     const feastsAndSaints = () =>{
-        const saints = saint && saint.map(e=>(<><span>{`${e.name.slice(0, 20)}...`}</span></>))
-        const feasts = feast && feast.map(e=>(<span>{`${e.name.slice(0, 20)}...`}</span>))
+        const saints = saint && saint.map((e,i)=>(<span key={i}>{`${e.name.slice(0, 20)}...`}</span>))
+        const feasts = feast && feast.map((e,i)=>(<span key={i}>{`${e.name.slice(0, 20)}...`}</span>))
         return (
             <>
-                <sub style={{color: "red", "font-style":"italic", "text-transform":"capitalize", "top":"-7em", position:"relative"}}>{week_day}</sub>
+                <sub style={{color: "red", "fontStyle":"italic", "textTransform":"capitalize", "top":"-7em", position:"relative"}}>{week_day}</sub>
                 {saints}
                 {feasts}
             </>

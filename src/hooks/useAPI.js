@@ -15,7 +15,7 @@ function useAPI(){
         import(`${apiAddress}orth_calendar/apijs/?v=${Date.now()}`).
         then(response=>{
             setApiMethods(response)
-            setApiLoaded(!apiLoaded)
+            setApiLoaded(true)
         }).catch(err=>{
             console.log(err)
             throw new Error("Failed to fetch API methods")

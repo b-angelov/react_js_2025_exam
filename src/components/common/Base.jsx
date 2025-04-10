@@ -15,7 +15,6 @@ export default function Base(){
 
     const {reload,setReload} = useState(false)
     const {setReloadPage} = useReload()
-    const {loadApiFiles} = useAPI()
     const {addStyle,addExternalStyle} = useOrderedStyles();
     addStyle(`/main.css`,'main')
     addExternalStyle(`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`)
@@ -26,7 +25,6 @@ export default function Base(){
 
     useEffect(() => {
         setReloadPage("home", reloadCallback)
-        loadApiFiles()
     }, []);
 
     return (
@@ -60,6 +58,7 @@ export default function Base(){
                         <div id="user3">
                             <table cellPadding="00" cellSpacing="00" className="pill" align="center"
                                    style={{padding:"0px", margin:"auto",  textAlign:"center", borderCollapse:"collapse",  borderSpacing:0, borderStyle:"none", borderWidth:"0px"}}>
+                                <tbody>
                                 <tr>
                                     <td className="pwdth">
 
@@ -96,6 +95,7 @@ export default function Base(){
                                     </td>
 
                                 </tr>
+                                </tbody>
 
                             </table>
 

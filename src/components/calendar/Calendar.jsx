@@ -11,7 +11,7 @@ export default function Calendar(){
     const [calendarItems, setCalendarItems] = useState([])
     const intl = useIntl()
     const date = new Date();
-    const {apiMethods, apiLoaded} = useAPI()
+    const {apiMethods, apiLoaded, loadApiFiles} = useAPI()
     const {get} = apiMethods
 
     useEffect(() => {
@@ -20,11 +20,12 @@ export default function Calendar(){
                 .then(res => {
                     let items = getMonthMatrix(res, intl.locale)
                     items = items[Math.floor(date.getDate() / 7)]
-                    items = setCalendarItems(items.map(item => (<ListItem {...item} />)))
-                    console.log(getMonthMatrix(res))
+                    items = setCalendarItems(items.map((item, index) => (<ListItem key={"calendar-list" + index} {...item} />)))
                     return items
                 })
                 .catch(error => console.error(error))
+        } else{
+            (async () => await loadApiFiles())();
         }
     },[apiLoaded])
 
