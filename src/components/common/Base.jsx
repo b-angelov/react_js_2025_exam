@@ -8,7 +8,9 @@ import {Outlet} from "react-router-dom";
 import useAuth from "../../hooks/useAuth.js";
 import {useEffect, useState} from "react";
 import useReload from "../../hooks/useReload.js";
+import routes from "../../routes/routes.js";
 import useAPI from "../../hooks/useAPI.js";
+import {Link} from "react-router";
 
 
 export default function Base(){
@@ -39,11 +41,11 @@ export default function Base(){
                 <div id="website">
                     <div id="header-main-wrapper">
                         <div id="header">
-                            <a href="#">
+                            <Link to={routes["home"]}>
                                 <div id="logo">
 
                                 </div>
-                            </a>
+                            </Link>
                             <div className="user-name">
                                 {/*<!--{% if user.is_authenticated %}
                                     <span>{% translate 'you are logged in as: '|capfirst %}{{

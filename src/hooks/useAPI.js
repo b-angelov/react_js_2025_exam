@@ -30,7 +30,16 @@ function useAPI(){
         }
     }
 
-    return {apiMethods, apiLoaded, loadNavFiles, loadApiFiles}
+    async function loadArticles(date, feast, saint, holiday, author){
+        try{
+            return await api.get(`${apiAddress}api/articles/?date=${date||""}&feast=${feast||""}&saint=${saint||""}&holiday=${holiday||""}&author=${author||""}`)
+        } catch(err){
+            console.log(err)
+            throw new Error("Failed to fetch articles")
+        }
+    }
+
+    return {apiMethods, apiLoaded, loadNavFiles, loadApiFiles, loadArticles}
 
 }
 

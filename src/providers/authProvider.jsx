@@ -34,7 +34,8 @@ const AuthProvider = ({ children }) => {
             token,
             setToken,
             api,
-            apiLoaded
+            apiLoaded,
+            is_authenticated: !!token,
         }),
         [token, api, apiLoaded]
     );
