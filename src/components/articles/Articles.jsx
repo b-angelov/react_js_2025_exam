@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth.js";
 import AuthContext from "../../contexts/AuthContext.js";
 import routes from "../../routes/routes.js";
 import {useNavigate} from "react-router";
+import saintImage from "../../assets/images/articles/saint.webp";
 
 export default function Articles(props) {
     const {
@@ -39,7 +40,7 @@ export default function Articles(props) {
             <>
                 <article className="new-article-tile" onClick={() => navigate(routes["article-create"])}>
                     <figure>
-                        <img src={'./src/assets/images/articles/saint.webp'} alt={"няма намерени картички"}/>
+                        <img src={saintImage} alt={"няма намерени картички"}/>
                     </figure>
                     <main>
                         <h2 style={{textTransform: "capitalize"}}>добави картичка</h2>
@@ -62,7 +63,7 @@ export default function Articles(props) {
         <>
             <article>
                 <figure>
-                    <img src={'./src/assets/images/articles/saint.webp'} alt={"няма намерени картички"}/>
+                    <img src={saintImage} alt={"няма намерени картички"}/>
                 </figure>
                 <main>
                     <h2 style={{textTransform: "capitalize"}}>Няма картички за този ден</h2>

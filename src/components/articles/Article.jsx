@@ -4,6 +4,7 @@ import {useContext, useEffect, useState} from "react";
 import AuthContext from "../../contexts/AuthContext.js";
 import {useNavigate, useParams} from "react-router";
 import ArticleTile from "./ArticleTile.jsx";
+import saintImage from "../../assets/images/articles/saint.webp";
 
 export default function Article(props) {
     const {date, feast, saint, holiday, author, image, content, title} = props
@@ -33,7 +34,7 @@ export default function Article(props) {
                 <article>
                     <figure>
                         {!!article.image && (<img src={article.image} alt={article.title}/>)}
-                        {!article.image && (<img src={'./src/assets/images/articles/saint.webp'} alt="няма изображение"/>)}
+                        {!article.image && (<img src={saintImage} alt="няма изображение"/>)}
                     </figure>
                     <main>
                         <h2>{article.title}</h2>
