@@ -30,9 +30,9 @@ function useAPI(){
         }
     }
 
-    async function loadArticles(date, feast, saint, holiday, author){
+    async function loadArticles(date, feast, saint, holiday, author, id){
         try{
-            return await api.get(`${apiAddress}api/articles/?date=${date||""}&feast=${feast||""}&saint=${saint||""}&holiday=${holiday||""}&author=${author||""}`)
+            return await api.get(`${apiAddress}api/articles/?id=${id||""}&date=${date||""}&feast=${feast||""}&saint=${saint||""}&holiday=${holiday||""}&author=${author||""}`)
         } catch(err){
             console.log(err)
             throw new Error("Failed to fetch articles")

@@ -25,7 +25,7 @@ export default function Articles(props) {
     useEffect(() => {
         loadArticles(date, feast, saint, holiday, author).then(response =>{
             setArticles(response.data.map(article => {
-                return <ArticleTile key={article.id} {...article}/>
+                return <ArticleTile key={article.id} {...article} navigate={navigate}/>
             }))
         }
         )

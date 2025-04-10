@@ -1,11 +1,12 @@
+import routes from "../../routes/routes.js";
 
 export default function ArticleTile(props) {
 
-    const {date, feast, saint, holiday, author, image, content, title} = props
+    const {id, date, feast, saint, holiday, author, image, content, title, navigate} = props
 
     return (
         <>
-            <article onClick="window.location.href='{{ article.article_url }}';">
+            <article onClick={() => navigate(routes["article-detail"].replace(":id", id))}>
                 <figure>
                     {!!image && (<img src={image} alt={title}/>)}
                     {!image && (<img src={'/src/assets/images/articles/saint.webp'} alt="няма изображение"/>)}
