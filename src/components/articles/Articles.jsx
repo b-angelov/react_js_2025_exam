@@ -8,6 +8,7 @@ import routes from "../../routes/routes.js";
 import {useNavigate} from "react-router";
 import saintImage from "../../assets/images/articles/saint.webp";
 import React from "react";
+import DateCalendar from "./DateCalendar.jsx";
 
 
 export default function Articles(props) {
@@ -57,20 +58,7 @@ export default function Articles(props) {
     let add;
 
     final.push(
-        date && (<React.Fragment key={"calendar-main"}><div id="calendar-main">
-            <div className="calendar">
-                Използван календар:
-                <p>{dayData?.calendar}</p>
-            </div>
-            <div className="saint">
-                <p className="desc">Православни светци, чествани днес:</p>
-                {dayData?.saint?.map((item, index) => (<p key={item.id}>{item.name}</p>))}
-            </div>
-            <div className="feast">
-                <p className="desc">Православни празници днес:</p>
-                {dayData?.feast?.map((item, index) => (<p key={item.id}>{item.name}</p>))}
-            </div>
-        </div></React.Fragment>)
+        date && (<React.Fragment key={"calendar-main"}><DateCalendar {...dayData}/></React.Fragment>)
     )
 
     if (is_authenticated) {
