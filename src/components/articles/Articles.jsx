@@ -57,10 +57,6 @@ export default function Articles(props) {
     const final = []
     let add;
 
-    final.push(
-        date && (<React.Fragment key={"calendar-main"}><DateCalendar {...dayData}/></React.Fragment>)
-    )
-
     if (is_authenticated) {
         add = (
             <React.Fragment key={"add-article"}>
@@ -100,6 +96,10 @@ export default function Articles(props) {
             </section>
         </React.Fragment>
     ))
+
+    final.push(
+        date && (<React.Fragment key={"calendar-main"}><DateCalendar {...dayData}/></React.Fragment>)
+    )
 
     return final
 }
