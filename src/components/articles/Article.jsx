@@ -2,16 +2,17 @@ import useAPI from "../../hooks/useAPI.js";
 import useOrderedStyles from "../../hooks/useOrderedStyles.js";
 import {useContext, useEffect, useState} from "react";
 import AuthContext from "../../contexts/AuthContext.js";
-import {useNavigate, useParams} from "react-router";
+import {Link, useNavigate, useParams} from "react-router";
 import ArticleTile from "./ArticleTile.jsx";
 import saintImage from "../../assets/images/articles/saint.webp";
+import routes from "../../routes/routes.js";
 
 export default function Article(props) {
     const {date, feast, saint, holiday, author, image, content, title} = props
     const {id} = useParams()
     const {loadArticles} = useAPI();
     const {addStyle} = useOrderedStyles()
-    const {is_authenticated} = useContext(AuthContext)
+    const {is_authenticated, is_owner, is_admin, is_superuser} = useContext(AuthContext)
     const [article, setArticle] = useState({});
     const navigate = useNavigate();
 
@@ -41,16 +42,13 @@ export default function Article(props) {
                         <p>{article.content}</p>
                         <nav>
                             <ul>
-                                {/*{% if article.is_own %}*/}
-                                {/*<li><a href="{% url "article-delete" article.pk %}">*/}
-                                {/*    */}
-                                {/*</a></li>*/}
-                                {/*{% endif %}*/}
+                                {(is_owner() || is_superuser()) && (<li><Link to={routes["article-delete"].replace(":id", article.id)} onClick={e=>e.stopPropagation()}>
+                                    
+                                </Link></li>)}
                                 {/*{% if article.can_change or article.is_own %}*/}
-                                {/*<li><a href="{% url "article-edit" article.pk %}">*/}
-                                {/*    */}
-                                {/*</a></li>*/}
-                                {/*{% endif %}*/}
+                                {(is_owner() || is_superuser() || is_admin()) && (<li><Link onClick={e=>e.stopPropagation()} to={routes["article-edit"].replace(":id", article.id)}>
+                                    
+                                </Link></li>)}
                             </ul>
                         </nav>
                     </main>

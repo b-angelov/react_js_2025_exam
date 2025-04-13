@@ -20,14 +20,19 @@ export default function Base(){
     const {addStyle,addExternalStyle} = useOrderedStyles();
     addStyle(`/main.css`,'main')
     addExternalStyle(`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`)
-    const {context} = useAuth()
+    const {context, login, user} = useAuth()
     const reloadCallback = ()=> setReload(!reload)
 
 
 
     useEffect(() => {
+        (async () =>{
+            await login()
+    })();
         setReloadPage("home", reloadCallback)
     }, []);
+
+
 
     return (
         <>
@@ -175,8 +180,8 @@ export default function Base(){
                                 {% endblock %}-->*/}
                                 </div>
 
-                                <div id="component" className="no-component-background  disable-preview">
-                                    <div className="message-container  disable-preview">
+                                <div id="component" className="no-component-background" >
+                                    <div className="message-container" >
                                         {/*<!--{% block message_content %}
                                         {% for message in messages %}
                                             <div>

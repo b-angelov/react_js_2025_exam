@@ -1,14 +1,18 @@
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import AuthContext from "../contexts/AuthContext.js";
 import axios, {AxiosHeaders} from "axios";
+import {jwtDecode} from "jwt-decode";
 
 export default function useAuth()  {
     const context = useContext(AuthContext);
-    const {token, setToken, api} = context;
+    const {token, setToken, api, setUser, user} = context;
 
     const login = (username, password)=>{
         let response;
-        if(!token){
+
+        console.log(token)
+
+        if(username && password){
             // fetch(`${import.meta.env.VITE_API_URL}/api/token/`, {})
             // response = fetch(`${import.meta.env.VITE_API_ADDRESS}api/token/`,{
             //     method: 'POST',
@@ -33,6 +37,8 @@ export default function useAuth()  {
             response = api.post(`/api/token/`,{username,password}).
             then(response=>{
                 setToken(response.data.access);
+                console.log(jwtDecode(response.data.access))
+                setUser(jwtDecode(response.data.access))
                 return {status: 200, data: response};
             }).catch((error) => {
                 console.error("Error logging in:", error);
@@ -62,6 +68,8 @@ export default function useAuth()  {
             response = api.post(`/api/token/refresh/`).
             then(response=>{
                 setToken(response.data.access);
+                console.log(jwtDecode(response.data.access))
+                setUser(jwtDecode(response.data.access))
                 return {status: 200, data: response};
             }).catch((error) => {
                 console.error("Error logging in:", error);
@@ -73,8 +81,11 @@ export default function useAuth()  {
     }
 
     const logout = async () => {
+        await api.post(`/api/token/logout/`, {});
         await setToken(null);
+        await setUser({});
     }
+
 
     return {context, login, logout};
 }

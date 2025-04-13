@@ -11,7 +11,6 @@ function toggleIfContent(element){
 }
 
 export default function mainSectionToggle(){
-
     const section = document.querySelector('#component')
     let toggle = false;
     for (const child of Object.values(section.children)){

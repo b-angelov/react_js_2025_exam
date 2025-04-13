@@ -7,6 +7,7 @@ import AuthContext from "../../contexts/AuthContext.js";
 import routes from "../../routes/routes.js";
 import {useNavigate} from "react-router";
 import saintImage from "../../assets/images/articles/saint.webp";
+import React from "react";
 
 
 export default function Articles(props) {
@@ -16,7 +17,7 @@ export default function Articles(props) {
 
     const {loadArticles, apiMethods, apiLoaded, loadApiFiles} = useAPI();
     const {addStyle} = useOrderedStyles()
-    const {is_authenticated} = useContext(AuthContext)
+    const {is_authenticated, is_owner, is_superuser, is_admin, user} = useContext(AuthContext)
     const [articles, setArticles] = useState([]);
     const [dayData, setDayData] = useState({});
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ export default function Articles(props) {
     useEffect(() => {
         loadArticles(date, feast, saint, holiday, author).then(response =>{
             setArticles(response.data.map(article => {
-                return <ArticleTile key={article.id} {...article} navigate={navigate}/>
+                return <ArticleTile {...article} key={article.id} is_owner={is_owner} is_superuser={is_superuser} is_admin={is_admin} navigate={navigate}/>
             }))
         }
         )
@@ -37,10 +38,10 @@ export default function Articles(props) {
 
 
 
-    },[date, feast, saint, holiday, author]);
+    },[date, feast, saint, holiday, author, user]);
 
     useEffect(() => {
-        if(apiLoaded) {
+        if(apiLoaded && date) {
             const {get} = apiMethods
             console.log("apiLoaded")
             get("holidays", {by_date: date, related: true}).then(res => {
@@ -50,31 +51,31 @@ export default function Articles(props) {
         } else {
             (async () => await loadApiFiles())();
         }
-    }, [apiLoaded])
+    }, [apiLoaded, articles])
 
     const final = []
     let add;
 
     final.push(
-        (<div id="calendar-main">
+        date && (<React.Fragment key={"calendar-main"}><div id="calendar-main">
             <div className="calendar">
                 Използван календар:
-                <p>{dayData.holidays?.calendar}</p>
+                <p>{dayData?.calendar}</p>
             </div>
             <div className="saint">
                 <p className="desc">Православни светци, чествани днес:</p>
-                {dayData?.saint?.map((item, index) => (<p>{item.name}</p>))}
+                {dayData?.saint?.map((item, index) => (<p key={item.id}>{item.name}</p>))}
             </div>
             <div className="feast">
                 <p className="desc">Православни празници днес:</p>
-                {dayData?.feast?.map((item, index) => (<p>{item.name}</p>))}
+                {dayData?.feast?.map((item, index) => (<p key={item.id}>{item.name}</p>))}
             </div>
-        </div>)
+        </div></React.Fragment>)
     )
 
     if (is_authenticated) {
         add = (
-            <>
+            <React.Fragment key={"add-article"}>
                 <article className="new-article-tile" onClick={() => navigate(routes["article-create"])}>
                     <figure>
                         <img src={saintImage} alt={"няма намерени картички"}/>
@@ -84,20 +85,20 @@ export default function Articles(props) {
                         <p className="new-article-sign"> + </p>
                     </main>
                 </article>
-            </>
+            </React.Fragment>
         )
     }
 
     final.push( articles.length ? (
-        <>
+        <React.Fragment key={"articles"}>
             <p style={{"textTransform": "capitalize"}}>Преглед на картички от статиите</p>
             <section className="article-list">
                 {articles}
                 {add}
             </section>
-        </>
+        </React.Fragment>
     ) : (
-        <>
+        <React.Fragment key={"no-articles"}>
             <section className="article-list">
             <article>
                 <figure>
@@ -109,7 +110,7 @@ export default function Articles(props) {
                 </main>
             </article>
             </section>
-        </>
+        </React.Fragment>
     ))
 
     return final

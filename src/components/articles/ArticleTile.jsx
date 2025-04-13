@@ -1,8 +1,9 @@
 import routes from "../../routes/routes.js";
+import {Link} from "react-router";
 
 export default function ArticleTile(props) {
 
-    const {id, date, feast, saint, holiday, author, image, content, title, navigate} = props
+    const {id, date, feast, saint, holiday, author, image, content, title, navigate, is_owner, is_superuser, is_admin} = props
 
     return (
         <>
@@ -17,16 +18,13 @@ export default function ArticleTile(props) {
                     <p>{content.slice(0,75) + "..."}</p>
                     <nav>
                         <ul>
-                            {/*{% if article.is_own %}*/}
-                            {/*<li><a href="{% url " article-delete" article.pk %}">*/}
-                            {/*    */}
-                            {/*</a></li>*/}
-                            {/*{% endif %}*/}
+                            {(is_owner() || is_superuser()) && (<li><Link onClick={e=>e.stopPropagation()} to={routes["article-delete"].replace(":id", id)}>
+                                
+                            </Link></li>)}
                             {/*{% if article.can_change or article.is_own %}*/}
-                            {/*<li><a href="{% url " article-edit" article.pk %}">*/}
-                            {/*    */}
-                            {/*</a></li>*/}
-                            {/*{% endif %}*/}
+                            {(is_owner() || is_superuser() || is_admin()) && (<li><Link onClick={e=>e.stopPropagation()} to={routes["article-edit"].replace(":id", id)}>
+                                
+                            </Link></li>)}
                         </ul>
                     </nav>
 

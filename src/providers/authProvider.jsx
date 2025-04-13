@@ -5,6 +5,7 @@ import AuthContext from "../contexts/AuthContext.js";
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
     const [apiLoaded, setApiLoaded] = useState(false);
+    const [user, setUser] = useState({});
 
 
     const api = useMemo(() => {
@@ -27,7 +28,19 @@ const AuthProvider = ({ children }) => {
         }
 
         setApiLoaded(prev => !prev);
-    }, [token, api]);
+    }, [token, api])
+
+    const is_owner = (author_id) => {
+        return user?.user_id && (user?.user_id === author_id);
+    }
+
+    const is_admin = () => {
+        return !!user?.is_admin;
+    }
+
+    const is_superuser = () => {
+        return !!user?.is_superuser;
+    }
 
     const contextValue = useMemo(
         () => ({
@@ -36,6 +49,11 @@ const AuthProvider = ({ children }) => {
             api,
             apiLoaded,
             is_authenticated: !!token,
+            user,
+            setUser,
+            is_owner,
+            is_admin,
+            is_superuser,
         }),
         [token, api, apiLoaded]
     );
