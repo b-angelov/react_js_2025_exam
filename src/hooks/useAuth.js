@@ -89,7 +89,7 @@ export default function useAuth()  {
 
     const logout = async (messageCallback=()=>{}) => {
         await api.post(`/api/token/logout/`, {}).
-        then(response=>toggleSuccess(response.status === 200, "Излязохте успешено!", "Излизането сe провали!", messageCallback)).
+        then(response=>toggleSuccess(response.status === 200, "Излизането е успешено!", "Излизането сe провали!", messageCallback)).
         catch((error) => {
             console.error("Error logging out:", error);
             messageCallback("Излизането сe провали!")
