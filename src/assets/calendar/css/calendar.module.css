@@ -16,19 +16,24 @@
 .calendar_holder ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  column-gap: 1.21rem;
+  row-gap: 0.11em;
   flex-wrap: wrap;
   list-style: none;
+  overflow: hidden;
+  position: relative;
+  left: -0.8em;
 }
 .calendar_holder ul li {
   display: flex;
   width: 7rem;
   height: 7rem;
-  margin: 0.25rem;
+  margin: 0.1rem;
   flex-flow: column;
   border-radius: 0.2rem;
-  padding: 1rem;
+  padding: 0.01rem;
   font-weight: 300;
-  font-size: 0.8rem;
+  font-size: 1.08rem;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -37,14 +42,36 @@
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
+
+.calendar_holder ul li span:first-of-type{
+  margin-top:0 !important;
+  padding-top: 0 !important;
+  position: relative;
+  bottom:1.4em;
+}
+
+.calendar_holder ul li > *{
+  position:relative;
+  padding: 0.01rem;
+  margin: 0.01rem;
+  padding-top: 0 !important;
+}
+
 .calendar_holder ul li time {
   font-size: 2rem;
-  margin: 0 0 1rem 0;
+  margin: 0.8rem 0 0.01rem 0;
   font-weight: 500;
 }
+
+.calendar_holder ul li sub{
+  position:relative;
+  top: -3.6rem;
+}
+
 .calendar_holder ul .today {
   background: #ffffff70;
 }
+
 .calendar_holder ul .today time {
   font-weight: 800;
 }

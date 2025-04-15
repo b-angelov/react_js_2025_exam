@@ -6,7 +6,7 @@ export default function ListItem(props){
         const feasts = feast && feast.map((e,i)=>(<span key={i}>{`${e.name.slice(0, 20)}...`}</span>))
         return (
             <>
-                <sub style={{color: "red", "fontStyle":"italic", "textTransform":"capitalize", "top":"-7em", position:"relative"}}>{week_day}</sub>
+                <sub style={{color: "red", "fontStyle":"italic", "textTransform":"capitalize"}}>{week_day}</sub>
                 {saints}
                 {feasts}
             </>
