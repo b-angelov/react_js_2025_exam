@@ -6,6 +6,7 @@ const routes = {
     "login-page": "/login",
     "logout-page": "/logout",
     "all-articles": "/articles",
+    "user-articles": "/articles/my",
     "article-detail": "/articles/:id",
     "article-create": "/articles/create",
     "article-delete": "/articles/delete/:id",
