@@ -47,7 +47,6 @@ export default function Articles(props) {
     useEffect(() => {
         if(apiLoaded && date) {
             const {get} = apiMethods
-            console.log("apiLoaded")
             get("holidays", {by_date: date, related: true}).then(res => {
                 setDayData(res)
                 console.log(res)
@@ -77,7 +76,6 @@ export default function Articles(props) {
     }
 
     if(!articles.length || (!is_authenticated && articles.length % 2 === 1)) {
-        console.log("adding empty article")
         const fragment = <TilePlaceholder/>
         articles.length ? articles.push(fragment) : placeholder.push(fragment)
     }
