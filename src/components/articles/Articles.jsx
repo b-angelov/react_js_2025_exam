@@ -75,7 +75,7 @@ export default function Articles(props) {
     }
 
     if(!articles.length || (!is_authenticated && articles.length % 2 === 1)) {
-        const fragment = <TilePlaceholder/>
+        const fragment = <TilePlaceholder key={"article-tile-placeholder"}/>
         articles.length ? articles.push(fragment) : placeholder.push(fragment)
     }
 

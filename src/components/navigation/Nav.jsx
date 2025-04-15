@@ -37,7 +37,7 @@ export default function Nav(){
 
     const renderItems = () => {
         return navData.map((item, index) => (
-            <NavItem key={index} item={item} />
+            <NavItem key={item.url_internal + index} item={item} />
         ));
     }
     return (

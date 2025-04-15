@@ -1,8 +1,11 @@
 import {Link, NavLink} from "react-router-dom";
 import routes from "../../routes/routes.js";
+import {useState} from "react";
 
 export default function NavItem(props) {
     const {item} = props;
+    const [dropdown, setDropdown] = useState(false);
+    let children = null;
     const lnk = item.url_internal ? (
         <NavLink to={routes[item.url_internal]} className="dropdown-toggle" data-toggle="dropdown"
               role="button" aria-haspopup="true"
@@ -21,11 +24,17 @@ export default function NavItem(props) {
         <li><a href={item.url_external} style={{"textTransform": "capitalize", cursor:"pointer"}}>{item.item_name}</a></li>
     )
 
-    return item.children.length ? (
-        <li className="dropdown">
+    if(item?.children?.length) {
+        children = item.children.map((child, idx) => {
+            return (<NavItem key={child.url_internal+idx} item={child}/>)
+        });
+    }
+
+    return item?.children?.length ? (
+        <li className="dropdown" onMouseOver={()=>setDropdown(true)} onMouseLeave={()=>setDropdown(false)}>
             {lnk}
-            <ul className="dropdown-menu">
-                {lnk2}
+            <ul className="dropdown-menu" style={{display: dropdown ? "flex" : "none"}}>
+                {children}
             </ul>
         </li>
     ) : (
