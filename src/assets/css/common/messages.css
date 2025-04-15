@@ -27,10 +27,11 @@
     visibility: hidden;
 }
 
-.message-container > div{
+.message-container > div {
     border-radius: 60%/50%;
-    background: rgb(132,11,11,0.5);
+    background: rgb(132, 11, 11, 0.5);
     width: 50%;
     margin-left: 25%;
 }
+
 

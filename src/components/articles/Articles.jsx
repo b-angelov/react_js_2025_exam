@@ -9,6 +9,8 @@ import {useNavigate} from "react-router";
 import saintImage from "../../assets/images/articles/saint.webp";
 import React from "react";
 import DateCalendar from "./DateCalendar.jsx";
+import favicon from "../../assets/images/favicon.png";
+import TilePlaceholder from "./TilePlaceholder.jsx";
 
 
 export default function Articles(props) {
@@ -22,6 +24,7 @@ export default function Articles(props) {
     const [articles, setArticles] = useState([]);
     const [dayData, setDayData] = useState({});
     const navigate = useNavigate();
+    const placeholder = []
 
 
     useEffect(() => {
@@ -73,12 +76,19 @@ export default function Articles(props) {
         )
     }
 
+    if(!articles.length || (!is_authenticated && articles.length % 2 === 1)) {
+        console.log("adding empty article")
+        const fragment = <TilePlaceholder/>
+        articles.length ? articles.push(fragment) : placeholder.push(fragment)
+    }
+
     final.push( articles.length ? (
         <React.Fragment key={"articles"}>
             <p style={{"textTransform": "capitalize"}}>Преглед на картички от статиите</p>
             <section className="article-list">
                 {articles}
                 {add}
+                {placeholder}
             </section>
         </React.Fragment>
     ) : (
@@ -93,6 +103,7 @@ export default function Articles(props) {
                     <p>Все още няма добавени картички за този ден</p>
                 </main>
             </article>
+                {placeholder}
             </section>
         </React.Fragment>
     ))

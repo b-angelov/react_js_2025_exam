@@ -102,3 +102,21 @@
 .article-list nav ul li{
     padding: 0 0.3em 0 0.2em;
 }
+
+.empty-article-tile{
+    background-color:transparent !important;
+    border: 5px rgba(242, 233, 216, 0.4) ridge;
+    box-shadow: none !important;
+}
+
+.empty-article-tile main{
+    position: relative;
+    border:none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding-top: 20%;
+    padding-left: 10%;
+    color: rgb(233,233,233,0.4);
+    text-shadow: rgb(133,133,133,0.9) 0.02em 0.03em 0.1em;
+    font-size: 1.8em;
+}
