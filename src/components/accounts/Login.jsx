@@ -3,6 +3,8 @@ import {useForm} from "../../hooks/useForm.js";
 import useAuth from "../../hooks/useAuth.js";
 import {useNavigate} from "react-router";
 import routes from "../../routes/routes.js";
+import {useContext} from "react";
+import MainContext from "../../contexts/MainContext.js";
 
 const formValues = {
     username:"",
@@ -12,11 +14,12 @@ const formValues = {
 export default function Login() {
     const {addStyle} = useOrderedStyles();
     const {login} = useAuth();
+    const {setMessage} = useContext(MainContext)
     const navigate = useNavigate();
 
     const loginSubmitHandler = ({username, password}) =>{
         (async ()=> {
-            const logged = await login(username, password)
+            const logged = await login(username, password, setMessage)
             if (logged?.status === 200){
                 navigate(routes["home"])
             }else{

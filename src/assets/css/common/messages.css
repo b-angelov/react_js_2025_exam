@@ -3,6 +3,7 @@
 .message-container{
     transform: matrix(125);
     transition: all ease-in-out 1s 1s !important;
+    border-radius: 60%/8.5em;
     width: 5em;
     height: 2em;
     position: relative;
@@ -19,7 +20,7 @@
 
 }
 
-.message-container.hides{
+.message-container.hides, .message-container.appears{
     width: 0.3em;
     height: 0.3em;
     font-size: 0.1em;
@@ -27,6 +28,7 @@
 }
 
 .message-container > div{
+    border-radius: 60%/50%;
     background: rgb(132,11,11,0.5);
     width: 50%;
     margin-left: 25%;

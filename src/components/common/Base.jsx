@@ -6,36 +6,49 @@ import useOrderedStyles from "../../hooks/useOrderedStyles.js";
 import Nav from "../navigation/Nav.jsx";
 import {Outlet} from "react-router-dom";
 import useAuth from "../../hooks/useAuth.js";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import useReload from "../../hooks/useReload.js";
 import routes from "../../routes/routes.js";
 import useAPI from "../../hooks/useAPI.js";
 import {Link} from "react-router";
+import MainContext from "../../contexts/MainContext.js";
 
 
 export default function Base(){
 
     const {reload,setReload} = useState(false)
     const {setReloadPage} = useReload()
+    const [message, setMessage_] = useState(null)
+    const [styleHides, setStyleHides] = useState(false)
+    const [styleAppears, setStyleAppears] = useState(true)
     const {addStyle,addExternalStyle} = useOrderedStyles();
     addStyle(`/main.css`,'main')
     addExternalStyle(`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`)
     const {context, login, user} = useAuth()
     const reloadCallback = ()=> setReload(!reload)
+    const hideDuration = 6000
 
-
+    const setMessage = (message, duration=hideDuration) => {
+        setMessage_((<div>{message}</div>))
+        setTimeout(() => {setMessage_(null); setStyleHides(false); setStyleAppears(true)}, duration)
+    }
 
     useEffect(() => {
         (async () =>{
-            await login()
+            await login(null,null,setMessage)
     })();
         setReloadPage("home", reloadCallback)
     }, []);
 
+    useEffect(() => {
+        message && setTimeout(()=>{setStyleHides(true)},hideDuration - 2000)
+        message && setTimeout(()=>{setStyleAppears(false)},2)
+    },[message])
+
 
 
     return (
-        <>
+        <MainContext.Provider value={{setMessage}}>
             {/*<ExternalStyle url={`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`}/>*/}
             {/*!--{# here you can add planet image container if you'd like#}--*/}
             <div id="container">
@@ -181,7 +194,8 @@ export default function Base(){
                                 </div>
 
                                 <div id="component" className="no-component-background" >
-                                    <div className="message-container" >
+                                    {message && (<div className={"message-container" + (styleHides ? " hides" : "") + (styleAppears ? " appears" : "")}>
+                                        {message}
                                         {/*<!--{% block message_content %}
                                         {% for message in messages %}
                                             <div>
@@ -189,7 +203,7 @@ export default function Base(){
                                     </div>
                                     {% endfor %}
                                     {% endblock %}-->*/}
-                                    </div>
+                                    </div>)}
 
                                     <div className={`component-wrapper`} >
                                         <Outlet/>
@@ -232,6 +246,6 @@ export default function Base(){
 
             {/*<!--</tag|class=div|containerplanetimage>-->*/}
 
-        </>
+        </MainContext.Provider>
     );
 }

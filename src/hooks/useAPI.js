@@ -12,7 +12,7 @@ function useAPI(){
     const apiAddress = import.meta.env.VITE_API_ADDRESS;
 
     async function loadApiFiles(){
-        import(`${apiAddress}orth_calendar/apijs/?v=${Date.now()}`).
+        import(`${apiAddress}orth_calendar/apijs/?v=${Date.now()}` /* @vite-ignore */).
         then(response=>{
             setApiMethods(response)
             setApiLoaded(true)
