@@ -49,7 +49,6 @@ export default function Articles(props) {
             const {get} = apiMethods
             get("holidays", {by_date: date, related: true}).then(res => {
                 setDayData(res)
-                console.log(res)
             })
         } else {
             (async () => await loadApiFiles())();
