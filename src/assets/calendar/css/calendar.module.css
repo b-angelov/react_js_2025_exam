@@ -3,7 +3,7 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  font-family: "Poppins", serif;
+  /*font-family: "Poppins", serif;*/
   background: #eeaeca;
   background: radial-gradient(circle, #eeaeca 0%, #94bbe9 100%);
 }
