@@ -10,6 +10,7 @@ const routes = {
     "article-detail": "/articles/:id",
     "article-create": "/articles/create",
     "article-delete": "/articles/delete/:id",
+    "article-update": "/articles/update/:id",
     "article-edit": "/articles/edit/:id",
 }
 
