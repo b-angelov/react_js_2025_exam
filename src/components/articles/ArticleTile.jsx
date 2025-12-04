@@ -1,5 +1,6 @@
 import routes from "../../routes/routes.js";
 import {Link} from "react-router";
+import saintImage from "../../assets/images/articles/saint.webp";
 
 export default function ArticleTile(props) {
 
@@ -10,7 +11,7 @@ export default function ArticleTile(props) {
             <article onClick={() => navigate(routes["article-detail"].replace(":id", id))}>
                 <figure>
                     {!!image && (<img src={image} alt={title}/>)}
-                    {!image && (<img src={'./src/assets/images/articles/saint.webp'} alt="няма изображение"/>)}
+                    {!image && (<img src={saintImage} alt="няма изображение"/>)}
 
                 </figure>
                 <main>

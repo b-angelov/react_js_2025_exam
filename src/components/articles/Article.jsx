@@ -42,11 +42,11 @@ export default function Article(props) {
                         <p>{article.content}</p>
                         <nav>
                             <ul>
-                                {(is_owner() || is_superuser()) && (<li><Link to={routes["article-delete"].replace(":id", article.id)} onClick={e=>e.stopPropagation()}>
+                                {(is_owner(article.author) || is_superuser()) && (<li><Link to={routes["article-delete"].replace(":id", article.id)} onClick={e=>e.stopPropagation()}>
                                     
                                 </Link></li>)}
                                 {/*{% if article.can_change or article.is_own %}*/}
-                                {(is_owner() || is_superuser() || is_admin()) && (<li><Link onClick={e=>e.stopPropagation()} to={routes["article-edit"].replace(":id", article.id)}>
+                                {(is_owner(article.author) || is_superuser() || is_admin()) && (<li><Link onClick={e=>e.stopPropagation()} to={routes["article-edit"].replace(":id", article.id)}>
                                     
                                 </Link></li>)}
                             </ul>
