@@ -29,7 +29,7 @@ export default function Login() {
         })()
     }
 
-    const {values, changeHandler, submitHandler} = useForm(formValues, loginSubmitHandler)
+    const {changeHandler, submitHandler} = useForm(formValues, loginSubmitHandler)
     addStyle('/accounts/forms.css','form-css')
 
     return (<>

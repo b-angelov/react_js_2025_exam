@@ -1,8 +1,9 @@
-import {useContext, useEffect} from "react";
+import {useContext} from "react";
 import AuthContext from "../contexts/AuthContext.js";
-import axios, {AxiosHeaders} from "axios";
+// import axios, {AxiosHeaders} from "axios";
 import {jwtDecode} from "jwt-decode";
 import MainContext from "../contexts/MainContext.js";
+// import useAPI from "./useAPI.js";
 
 export default function useAuth()  {
     const context = useContext(AuthContext);
@@ -19,8 +20,12 @@ export default function useAuth()  {
         if(username && password){
             response = api.post(`/api/token/`,{username,password}).
             then(response=>{
-                setToken(response.data.access);
-                setUser(jwtDecode(response.data.access))
+                (async () => {
+                    await setToken(response.data.access);
+                    const data = jwtDecode(response.data.access)
+                    setUser((prev) => ({...prev, ...data}))
+                    return {status: 200, data: response};
+                })();
                 toggleSuccess(response.status === 200, "Влизането e успешно!", "Влизането e неуспешно!", messageCallback)
                 return {status: 200, data: response};
             }).catch((error) => {
@@ -31,10 +36,15 @@ export default function useAuth()  {
         } else{
             response = api.post(`/api/token/refresh/`).
             then(response=>{
-                setToken(response.data.access);
-                setUser(jwtDecode(response.data.access))
+                const claims = jwtDecode(response.data.access);
+                (async ()=> {
+                    await setToken(response.data.access);
+                    setUser((prev)=>({...prev, ...claims}))
+                    return {status: 200, data: response};
+                })();
                 return {status: 200, data: response};
-            }).catch((error) => {
+            })
+                .catch((error) => {
                 console.error("Error logging in:", error);
                 return {status: 500, error}
             })
@@ -44,14 +54,24 @@ export default function useAuth()  {
     }
 
     const logout = async (messageCallback=()=>{}) => {
+        if(!token || !user) return;
         await api.post(`/api/token/logout/`, {}).
-        then(response=>toggleSuccess(response.status === 200, "Излизането е успешено!", "Излизането сe провали!", messageCallback)).
+        then(response=> {
+            toggleSuccess(response.status === 200, "Излизането е успешено!", "Излизането сe провали!", messageCallback);
+            (async () => {
+                await setToken(null);
+                await setUser({});
+            })();
+        }).
         catch((error) => {
+            if (error.response.data.error.toLowerCase().includes('blacklist')) {
+                    setToken(null)
+                    setUser({});
+                    messageCallback("Вече сте излезли");
+            }
             console.error("Error logging out:", error);
             messageCallback("Излизането сe провали!")
         });
-        await setToken(null);
-        await setUser({});
     }
 
 

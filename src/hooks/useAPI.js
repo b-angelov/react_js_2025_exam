@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import axios from "axios";
+// import axios from "axios";
 import useAuth from "./useAuth.js";
 
 function useAPI(){
@@ -7,7 +7,7 @@ function useAPI(){
     const [apiMethods,setApiMethods] = useState({})
     const [apiLoaded, setApiLoaded] = useState(false)
     const {context} = useAuth()
-    const api = context.api
+    const {api, token, setUser} = context
 
     const apiAddress = import.meta.env.VITE_API_ADDRESS;
 
@@ -39,7 +39,28 @@ function useAPI(){
         }
     }
 
-    return {apiMethods, apiLoaded, loadNavFiles, loadApiFiles, loadArticles}
+    const getProfile = async (token=null,id="my") => {
+        if (!token && !context?.token){ return; }
+        try {
+            let headers = {};
+            if(token){headers = {Authorization: `Bearer ${token}`}};
+            const response = await api.get(`/api/profile/${id}/`, headers);
+            return response.data
+        } catch (error) {
+            console.error("Error fetching profile:", error);
+            return null;
+        }
+    }
+
+    useEffect(() => {
+        if(!token) return;
+        getProfile().then(profileData=>{
+            setUser((prev) => ({
+                ...prev, ...profileData
+            }))})
+    }, [token]);
+
+    return {apiMethods, apiLoaded, loadNavFiles, loadApiFiles, loadArticles, getProfile}
 
 }
 

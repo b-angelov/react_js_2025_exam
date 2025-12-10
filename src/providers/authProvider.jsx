@@ -55,7 +55,7 @@ const AuthProvider = ({ children }) => {
             is_admin,
             is_superuser,
         }),
-        [token, api, apiLoaded]
+        [token, user, api, apiLoaded]
     );
 
     return (

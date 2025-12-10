@@ -1,22 +1,23 @@
 import Calendar from "../calendar/Calendar.jsx";
 import ExternalStyle from "./ExternalStyle.jsx";
 import CopyrightMessage from "./CopyrightMessage.jsx";
-import useExternalStyles from "../../hooks/useExternalStyles.js";
+// import useExternalStyles from "../../hooks/useExternalStyles.js";
 import useOrderedStyles from "../../hooks/useOrderedStyles.js";
 import Nav from "../navigation/Nav.jsx";
-import {Outlet} from "react-router-dom";
+import {Outlet, Link} from "react-router-dom";
 import useAuth from "../../hooks/useAuth.js";
-import {useContext, useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import useReload from "../../hooks/useReload.js";
 import routes from "../../routes/routes.js";
-import useAPI from "../../hooks/useAPI.js";
-import {Link} from "react-router";
+// import useAPI from "../../hooks/useAPI.js";
+// import {Link} from "react-router";
 import MainContext from "../../contexts/MainContext.js";
 
 
 export default function Base(){
 
-    const {reload,setReload} = useState(false)
+    const [reload,setReload] = useState(false)
+    // const [username, setUsername] = useState(null)
     const {setReloadPage} = useReload()
     const [message, setMessage_] = useState(null)
     const [styleHides, setStyleHides] = useState(false)
@@ -24,7 +25,8 @@ export default function Base(){
     const {addStyle,addExternalStyle} = useOrderedStyles();
     addStyle(`/main.css`,'main')
     addExternalStyle(`${import.meta.env.VITE_API_ADDRESS}dstyles/marble/css/`)
-    const {context, login, user} = useAuth()
+    const {context, login} = useAuth()
+    // const {user} = context
     const reloadCallback = ()=> setReload(!reload)
     const hideDuration = 6000
 
@@ -44,6 +46,13 @@ export default function Base(){
         message && setTimeout(()=>{setStyleHides(true)},hideDuration - 2000)
         message && setTimeout(()=>{setStyleAppears(false)},2)
     },[message])
+
+    // useEffect(() => {
+    //     console.log(context.user?.username,context.user, "userrrrrre")
+    //     setUsername(context.user?.username)
+    // }, [context.user, setUsername]);
+
+    const username = context?.user?.username;
 
 
 
@@ -71,6 +80,7 @@ export default function Base(){
                                 .username | capfirst
                             }}</span>
                             {% endif %}-->*/}
+                                {username && (<span>Вписан сте като: {username}</span>)}
                             </div>
                         </div>
 
