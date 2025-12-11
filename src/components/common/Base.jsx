@@ -12,6 +12,7 @@ import routes from "../../routes/routes.js";
 // import useAPI from "../../hooks/useAPI.js";
 // import {Link} from "react-router";
 import MainContext from "../../contexts/MainContext.js";
+import capitalize from "../../utils/capitalize.js";
 
 
 export default function Base(){
@@ -52,7 +53,7 @@ export default function Base(){
     //     setUsername(context.user?.username)
     // }, [context.user, setUsername]);
 
-    const username = context?.user?.username;
+    const username = capitalize(context?.user?.username);
 
 
 

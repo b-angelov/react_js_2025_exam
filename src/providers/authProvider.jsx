@@ -6,6 +6,8 @@ const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
     const [apiLoaded, setApiLoaded] = useState(false);
     const [user, setUser] = useState({});
+    const [attemptedLogin, setAttemptedLogin] = useState(false);
+
 
 
     const api = useMemo(() => {
@@ -54,8 +56,10 @@ const AuthProvider = ({ children }) => {
             is_owner,
             is_admin,
             is_superuser,
+            attemptedLogin,
+            setAttemptedLogin
         }),
-        [token, user, api, apiLoaded]
+        [token, user, api, apiLoaded,attemptedLogin]
     );
 
     return (

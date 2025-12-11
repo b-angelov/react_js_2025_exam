@@ -4,7 +4,8 @@ import { ProtectedRoute } from "./protectedRoute.jsx";
 
 const AppRouter = () => (
     <Routes>
-        {routeConfig.map(({path, element, nested, auth_required}, idx) => (
+        {routeConfig.map(({path, element, nested, auth_required}, idx) => {
+            let mainRoute = (
             <Route key={idx} path={path} element={element}>
                 {nested.map(({path: nestedPath, element: nestedElement, auth_required}, nestedIdx) => (
                     auth_required ? (
@@ -16,7 +17,16 @@ const AppRouter = () => (
                     )
                 ))}
             </Route>
-        ))}
+        )
+            if (auth_required) mainRoute = (
+                <Route key={idx} path={path} element={<ProtectedRoute />}>
+                    {mainRoute}
+                </Route>
+            )
+            return mainRoute;
+        }
+
+        )}
     </Routes>
 );
 

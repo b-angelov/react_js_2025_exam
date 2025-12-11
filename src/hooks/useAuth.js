@@ -7,7 +7,7 @@ import MainContext from "../contexts/MainContext.js";
 
 export default function useAuth()  {
     const context = useContext(AuthContext);
-    const {token, setToken, api, setUser, user} = context;
+    const {token, setToken, api, setUser, user, setAttemptedLogin} = context;
 
     const toggleSuccess = (success,onSuccess="",onFail="",fn=()=>{}) => {
         success ? fn(onSuccess) : fn(onFail);
@@ -32,7 +32,7 @@ export default function useAuth()  {
                 messageCallback("Влизането сe провали!")
                 console.error("Error logging in:", error);
                 return {status: 500, error}
-            })
+            }).finally(()=>setAttemptedLogin(true))
         } else{
             response = api.post(`/api/token/refresh/`).
             then(response=>{
@@ -47,7 +47,7 @@ export default function useAuth()  {
                 .catch((error) => {
                 console.error("Error logging in:", error);
                 return {status: 500, error}
-            })
+            }).finally(()=>setAttemptedLogin(true))
         }
 
         return response;

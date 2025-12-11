@@ -12,6 +12,9 @@ const routes = {
     "article-delete": "/articles/delete/:id",
     "article-update": "/articles/update/:id",
     "article-edit": "/articles/edit/:id",
+    "profile-page": "/profile",
+    "profile-edit-page": "/profile/edit",
+    "profile-delete-page": "/profile/delete",
 }
 
 export default routes

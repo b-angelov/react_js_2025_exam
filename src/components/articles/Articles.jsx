@@ -15,7 +15,7 @@ import TilePlaceholder from "./TilePlaceholder.jsx";
 
 export default function Articles(props) {
     const {
-        date, feast, saint, holiday, author
+        date, feast, saint, holiday, author, title, no_cards_title, no_cards_desc
     } = props;
 
     const {loadArticles, apiMethods, apiLoaded, loadApiFiles} = useAPI();
@@ -82,7 +82,7 @@ export default function Articles(props) {
 
     final.push( articles.length ? (
         <React.Fragment key={"articles"}>
-            <p style={{"textTransform": "capitalize"}}>Преглед на картички от статиите</p>
+            <p style={{"textTransform": "capitalize"}}>{title || "Преглед на картички от статиите"}</p>
             <section className="article-list">
                 {articles}
                 {add}
@@ -91,14 +91,15 @@ export default function Articles(props) {
         </React.Fragment>
     ) : (
         <React.Fragment key={"no-articles"}>
+            <p style={{"textTransform": "capitalize"}}>{title || "Преглед на картички от статиите"}</p>
             <section className="article-list">
             <article>
                 <figure>
                     <img src={saintImage} alt={"няма намерени картички"}/>
                 </figure>
                 <main>
-                    <h2 style={{textTransform: "capitalize"}}>Няма картички за този ден</h2>
-                    <p>Все още няма добавени картички за този ден</p>
+                    <h2 style={{textTransform: "capitalize"}}>{no_cards_title ||"Няма картички за този ден"}</h2>
+                    <p>{no_cards_desc || "Все още няма добавени картички свързани с този ден"}</p>
                 </main>
             </article>
                 {add || placeholder}
