@@ -6,11 +6,13 @@ import React, {useContext} from "react";
 import capitalize from "../../utils/capitalize.js";
 import {Link} from "react-router-dom";
 import routes from "../../routes/routes.js";
+import DeleteProfileModal from "./DeleteProfileModal.jsx";
 
 
 export default function Profile() {
 
     const {user} = useContext(AuthContext);
+    const [showDeleteModal, setShowDeleteModal] = React.useState(false);
 
     return (
         <section className="single-article">
@@ -52,7 +54,11 @@ export default function Profile() {
                     <nav>
                         <ul>
                             <li>
-                                <Link to={routes["profile-delete-page"]} onClick={e=>e.stopPropagation()} data-discover="true"></Link>
+                                <span to={routes["profile-delete-page"]} onClick={e=> {
+                                    e.stopPropagation()
+                                    setShowDeleteModal(true)
+                                }} data-discover="true" style={{cursor:"pointer"}}></span>
+                                <DeleteProfileModal isOpen={showDeleteModal} onClose={setShowDeleteModal} profileName={user?.username}></DeleteProfileModal>
                             </li>
                             <li>
                                 <Link to={routes["profile-edit-page"]} onClick={e=>e.stopPropagation()} data-discover="true"></Link>
