@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import {useEffect, useRef} from "react";
 import "../../assets/css/marble/modal-marble.css"
 
-export default function Modal({children, isOpen, onClose}) {
+export default function Modal({children, isOpen, onClose, message}) {
 
     const elRef = useRef(null);
 
@@ -24,12 +24,15 @@ export default function Modal({children, isOpen, onClose}) {
         };
     }, []);
 
+
+
     if (!elRef.current) return null;
 
     return ReactDOM.createPortal(
         isOpen ? (
             <div className="modal-backdrop" onClick={onClose} >
                 <div className="modal-window" onClick={(e) => e.stopPropagation()} >
+                    {message && <div className="modal-message">{message}</div>}
                     <button className="modal-close-btn" onClick={onClose}>
                         &times;
                     </button>

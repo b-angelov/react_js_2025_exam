@@ -15,6 +15,7 @@ const routes = {
     "profile-page": "/profile",
     "profile-edit-page": "/profile/edit",
     "profile-delete-page": "/profile/delete",
+    "register-page": "/register",
 }
 
 export default routes

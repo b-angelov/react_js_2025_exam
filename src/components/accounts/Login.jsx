@@ -3,8 +3,12 @@ import {useForm} from "../../hooks/useForm.js";
 import useAuth from "../../hooks/useAuth.js";
 import {useNavigate} from "react-router";
 import routes from "../../routes/routes.js";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import MainContext from "../../contexts/MainContext.js";
+import Modal from "../common/Modal.jsx";
+import "../../assets/css/accounts/forms.css"
+import Spinner from "../common/Spinner.jsx";
+
 
 const formValues = {
     username:"",
@@ -15,11 +19,12 @@ export default function Login() {
     const {addStyle} = useOrderedStyles();
     const {login} = useAuth();
     const {setMessage} = useContext(MainContext)
+    const [loginMessages, setLoginMessages] = useState("")
     const navigate = useNavigate();
 
     const loginSubmitHandler = ({username, password}) =>{
         (async ()=> {
-            const logged = await login(username, password, setMessage)
+            const logged = await login(username, password, setLoginMessages)
             if (logged?.status === 200){
                 navigate(routes["home"])
             }else{
@@ -29,10 +34,16 @@ export default function Login() {
         })()
     }
 
+    function close(){
+        navigate("/")
+    }
+
     const {changeHandler, submitHandler} = useForm(formValues, loginSubmitHandler)
     addStyle('/accounts/forms.css','form-css')
 
     return (<>
+        <Spinner></Spinner>
+        <Modal isOpen={true} onClose={close} message={loginMessages}>
         <div className="login">
             <form name="login-form" id="login-form" className="login" method="post" onSubmit={submitHandler}>
                 <div>
@@ -56,5 +67,6 @@ export default function Login() {
                 <input type="submit" value="влизане" onSubmit={submitHandler}/>
             </form>
         </div>
+        </Modal>
     </>);
 }

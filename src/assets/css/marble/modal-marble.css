@@ -9,11 +9,41 @@
     backdrop-filter: blur(4px);
 }
 
+.modal-backdrop, .modal-backdrop *:not(button){
+    text-shadow: #0a0606 1px 1px 1px;
+    color: #f2cd38;
+    font-size: 2.3rem;
+    border: 1px solid rgba(120, 110, 100, 0.3);
+}
+
+.modal-backdrop button{
+    color: rgba(235, 119, 23, 0.6);
+    border: 1px solid rgba(120, 110, 100, 0.3);
+    text-shadow: 1px 1px 1px rgba(10, 9, 9, 0.96);
+    margin: 0 auto;
+    display:block;
+}
+
+.modal-backdrop button:not(.modal-close-btn){
+    background-color: rgba(224, 219, 217, 0.72);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    box-shadow:
+            0 8px 20px rgba(15, 23, 42, 0.25),
+            0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+    cursor: pointer;
+}
+
+.modal-backdrop button:not(.modal-close-btn):hover{
+    background-color: rgba(249, 245, 245, 0.56);
+}
+
 /* MARBLE TILE LOOK */
 .modal-window {
     position: relative;
     max-width: min(90vw, 480px);
     max-height: 90vh;
+    min-height: 20vh;
     padding: 1.75rem 2rem;
     overflow: auto;
 
@@ -25,10 +55,15 @@
             radial-gradient(circle at 10% 20%, rgba(200, 190, 180, 0.45) 0, transparent 55%),
             radial-gradient(circle at 80% 30%, rgba(210, 200, 190, 0.35) 0, transparent 60%),
             radial-gradient(circle at 30% 80%, rgba(190, 180, 170, 0.35) 0, transparent 55%),
-            linear-gradient(120deg, rgba(255, 255, 255, 0.85), rgba(240, 234, 226, 0.9));
+            linear-gradient(120deg, rgba(255, 255, 255, 0.85), rgba(240, 234, 226, 0.4)),
+            url("/src/assets/images/decorations/christmas_modal_v1.png"),
+            linear-gradient(120deg, rgba(255, 255, 255, 0.85), rgba(240, 234, 226, 0.99));
 
-    background-blend-mode: overlay;
+    background-blend-mode: overlay, overlay, overlay, overlay, color-burn;
+    background-position: center, center, center, center, center;
+    background-repeat: repeat, repeat, repeat, repeat, no-repeat;
     border-radius: 16px;
+    background-size: contain;
 
     /* Tile-like border */
     border: 1px solid rgba(120, 110, 100, 0.3);
@@ -49,6 +84,10 @@
     margin-bottom: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.03em;
+    border: 3px groove rgba(187, 228, 244, 0.42);
+    background-color: rgba(238, 242, 242, 0.9);
+    border-radius: 1rem 0.6rem 1rem 0.6rem;
+    text-align: center;
 }
 
 .modal-window p {
@@ -58,9 +97,9 @@
 /* Simple close button style if you add one */
 .modal-close-btn {
     position: absolute;
-    top: 0.6rem;
-    right: 0.6rem;
-    border: none;
+    top: 0.5rem;
+    right: 0.5rem;
+    border: none!important;
     background: transparent;
     cursor: pointer;
     font-size: 2.0rem;

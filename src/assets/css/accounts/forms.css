@@ -52,3 +52,41 @@
 .login #login-form label, .site-form #login-form label{
     font-size: 0.86em;
 }
+
+.register{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    /*background-color: rgba(208, 245, 239, 0.85) !important;*/
+    border: 3px groove rgba(187, 228, 244, 0.42);
+    background-color: rgba(238, 242, 242, 0.9);
+}
+
+.login{
+    border: 3px groove rgba(187, 228, 244, 0.42);
+    background-color: rgba(238, 242, 242, 0.54);
+}
+
+.register div, .register label, .login div, .login label{
+    border-style:none;
+    /*background-color: rgb(151,221,179,0.4) !important;*/
+}
+
+.spinner-container{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:20%;
+    margin-bottom:20%;
+    padding-top: 10%;
+    padding-bottom: 30%;
+}
+
+.register input[disabled]{
+    background-color: rgba(200,200,200,0.4);
+    color: rgba(150,150,150,0.6);
+    border: 1px solid rgba(180,180,180,0.4);
+    cursor: not-allowed;
+}

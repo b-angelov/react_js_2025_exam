@@ -74,6 +74,22 @@ export default function useAuth()  {
         });
     }
 
+    const register = async  (username, password1, password2, messageCallback=()=>{}) => {
+        return api.post(`/api/register/`, {username, password1, password2}).
+        then(response=>{
+            toggleSuccess(response.status === 201, "Регистрацията е успешена!", "Регистрацията сe провали!", messageCallback)
+            setToken(response.data.access);
+            const data = jwtDecode(response.data.access)
+            setUser((prev) => ({...prev, ...data}))
+            return {status: 201, data: response};
+        }).
+        catch((error) => {
+            messageCallback("Регистрацията сe провали!")
+            console.error("Error registering:", error);
+            return {status: 500, error}
+        }).finally(()=>{setAttemptedLogin(true)});
+    }
 
-    return {context, login, logout};
+
+    return {context, login, logout, register};
 }

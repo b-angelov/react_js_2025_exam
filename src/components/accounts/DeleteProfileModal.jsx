@@ -23,7 +23,7 @@ export default function DeleteProfileModal({isOpen, onClose, profileName, profil
     return (
         <Modal isOpen={isOpen} onClose={() => onClose(false)}>
             <h2>Наистина ли искате да изтриете профил: {profileName} ?</h2>
-            <button onClick={deleteProfile}>ДА, изтрий профила</button>
+            <button onClick={deleteProfile}>ДА, изтрий</button>
         </Modal>
     )
 }
