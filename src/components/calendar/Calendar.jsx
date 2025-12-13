@@ -20,7 +20,7 @@ export default function Calendar({date: propDate}) {
     const {get} = apiMethods
 
     useEffect(() => {
-        if(apiLoaded) {
+        if(apiLoaded && date) {
             get("holidays", {by_month: date.getMonth() + 1, year: date.getFullYear()})
                 .then(res => {
                     setApiResponseItems(res)
@@ -39,11 +39,11 @@ export default function Calendar({date: propDate}) {
     },[apiLoaded, reloadFlag])
 
     useEffect(() => {
-        if(apiResponseItems.length){
+        if(apiResponseItems.length && date){
             let items = getMonthMatrix(apiResponseItems, intl.locale)
             items = items[Math.ceil((date.getDate() - (date.getDay() || 7)) / 7)]
             setCalendarItems(items.map((item, index) => (<ListItem active={(date.getDay() || 7) === index+1} currentDate={date} setDate={setDate} key={"calendar-list" + index} {...item} />)))
-            get("holidays", {by_date: date.toISOString("YYYY-MM-DD").split("T")[0], related: true}).then(res => {
+            get("holidays", {by_date: date.toISOString().split("T")[0], related: true}).then(res => {
                 setDayData(res)
             })
         }
@@ -57,8 +57,8 @@ export default function Calendar({date: propDate}) {
         <h1>Православен Календар</h1>
             {/*partial:index.partial.html*/}
             {/* days sourced from: https://nationaldaycalendar.com/february/ */}
-                <DateText value={date} onChange={(dateValue)=>{setDate(new Date(dateValue)); setReloadFlag(!reloadFlag)}}><h1>{new Intl.DateTimeFormat(intl.locale,{month:"long"}).format(date)} {date.getFullYear()}</h1></DateText>
-            <p>Седмица {Math.floor((date.getDate() - (date.getDay() || 7)) /  7)+1}</p>
+                <DateText value={date} onChange={(dateValue)=>{setDate(new Date(dateValue)); setReloadFlag(!reloadFlag)}}><h1>{new Intl.DateTimeFormat(intl.locale,{month:"long"}).format(date || Date.now())} {date.getFullYear()}</h1></DateText>
+            <p>Седмица {Math.ceil((date.getDate() - (date.getDay() || 7)) /  7)+1}</p>
             <ul>
                 {calendarItems}
             </ul>
