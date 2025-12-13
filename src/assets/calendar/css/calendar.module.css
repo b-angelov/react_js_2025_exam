@@ -30,6 +30,7 @@
   width: 7rem;
   height: 7rem;
   margin: 0.1rem;
+  min-width: 1rem;
   flex-flow: column;
   border-radius: 0.2rem;
   padding: 0.01rem;
@@ -42,6 +43,18 @@
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.calendar_holder ul li:hover{
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+}
+
+.active_li{
+  background: rgba(252, 91, 101, 0.25) !important;
+}
+.active_li:hover {
+  background: rgba(252, 91, 101, 0.35) !important;
 }
 
 .calendar_holder ul li span:first-of-type{

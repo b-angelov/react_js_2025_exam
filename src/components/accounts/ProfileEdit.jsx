@@ -84,7 +84,7 @@ export default function ProfileEdit() {
                     <label htmlFor="id_last_name">Фамилия:</label>
                     <input type="text" onChange={changeHandler} value={values.last_name} name={"last_name"} id={"id_last_name"} />
                     <label htmlFor="id_birth_date">Рождена дата:</label>
-                    <input type="text" onChange={changeHandler} name="birth_date" name={"birth_date"} value={values.birth_date} id="id_birth_date"/>
+                    <input type="date" onChange={changeHandler} name={"birth_date"} value={values.birth_date} id="id_birth_date"/>
                     <label htmlFor="id_email">Имейл:</label>
                     <input type="email" onChange={changeHandler} name="email" value={values.email} id="id_email"/>
 

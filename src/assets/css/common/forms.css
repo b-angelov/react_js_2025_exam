@@ -63,3 +63,8 @@ form select{
     min-width: 20vw !important;
     width: 100%;
 }
+
+.modal-window button:not(.modal-close-btn){
+    min-width: 10rem;
+    width: auto;
+}
