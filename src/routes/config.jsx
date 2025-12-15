@@ -13,6 +13,7 @@ import Profile from "../components/accounts/Profile.jsx";
 import ProfileEdit from "../components/accounts/ProfileEdit.jsx";
 import ProfileDelete from "../components/accounts/ProfileDelete.jsx";
 import Register from "../components/accounts/Register.jsx";
+import UserProfile from "../components/accounts/UserProfile.jsx";
 
 export const routeConfig = [
     { path: routes.home, element: <Base/>, nested: [
@@ -27,6 +28,7 @@ export const routeConfig = [
             {path: routes["logout-page"], element: <Logout/>, nested:[], auth_required: true},
             {path: routes["calendar-page"], element: <Calendar/>, nested:[], auth_required: false},
             {path: routes["profile-page"], element: <Profile/>, nested:[], auth_required: true},
+            {path: routes["user-profile-page"], element: <UserProfile/>, nested:[], auth_required: true},
             {path: routes["profile-edit-page"], element: <ProfileEdit/>, nested:[], auth_required: true},
             {path: routes["profile-delete-page"], element: <ProfileDelete/>, nested:[], auth_required: true},
             {path:routes["register-page"], element:<Register/>, nested:[], auth_required:false},

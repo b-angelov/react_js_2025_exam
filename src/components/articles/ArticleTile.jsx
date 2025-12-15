@@ -8,7 +8,7 @@ export default function ArticleTile(props) {
 
     return (
         <>
-            <article onClick={() => navigate(routes["article-detail"].replace(":id", id))}>
+            <article className={"article-tile"} onClick={() => navigate(routes["article-detail"].replace(":id", id))}>
                 <figure>
                     {!!image && (<img src={image} alt={title}/>)}
                     {!image && (<img src={saintImage} alt="няма изображение"/>)}
@@ -19,17 +19,20 @@ export default function ArticleTile(props) {
                     <p>{content.slice(0,75) + "..."}</p>
                     <nav>
                         <ul>
-                            {(is_owner() || is_superuser()) && (<li><Link onClick={e=>e.stopPropagation()} to={routes["article-delete"].replace(":id", id)}>
+                            {(is_owner(author.id) || is_superuser()) && (<li><Link onClick={e=>e.stopPropagation()} to={routes["article-delete"].replace(":id", id)}>
                                 
                             </Link></li>)}
                             {/*{% if article.can_change or article.is_own %}*/}
-                            {(is_owner() || is_superuser() || is_admin()) && (<li><Link onClick={e=>e.stopPropagation()} to={routes["article-edit"].replace(":id", id)}>
+                            {(is_owner(author.id) || is_superuser() || is_admin()) && (<li><Link onClick={e=>e.stopPropagation()} to={routes["article-edit"].replace(":id", id)}>
                                 
                             </Link></li>)}
                         </ul>
                     </nav>
 
                 </main>
+                <footer onClick={(e)=>{e.stopPropagation(); navigate(routes["user-profile-page"].replace(":id",author?.id))}}>
+                    <span className={"author"} >Автор: {(author?.first_name || author?.last_name) ? `${author?.first_name} ${author?.last_name}` : author?.username}</span>
+                </footer>
 
             </article>
         </>

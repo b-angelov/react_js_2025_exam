@@ -13,6 +13,7 @@ const routes = {
     "article-update": "/articles/update/:id",
     "article-edit": "/articles/edit/:id",
     "profile-page": "/profile",
+    "user-profile-page": "/user/:id",
     "profile-edit-page": "/profile/edit",
     "profile-delete-page": "/profile/delete",
     "register-page": "/register",

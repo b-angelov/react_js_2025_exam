@@ -35,7 +35,7 @@ export default function Articles(props) {
         console.log(user)
         loadArticles(date, feast, saint, holiday, author).then(response =>{
             setArticles(response.data.map(article => {
-                return <ArticleTile {...article} key={article.id} is_owner={()=>is_owner(article.author)} is_superuser={is_superuser} is_admin={is_admin} navigate={navigate}/>
+                return <ArticleTile {...article} key={article.id} is_owner={()=>is_owner(article.author.id)} is_superuser={is_superuser} is_admin={is_admin} navigate={navigate}/>
             }))
         }
         )

@@ -18,7 +18,8 @@ export default function DateText({ children, value, onChange }) {
             onChange={e => onChange(e.target.value)}
             onBlur={() => setEditing(false)}
         />
-        {/*{children || value || "—"}*/}</>
+        {children || value || "—"}
+        </>
     ) : (
         <span
             role="button"
