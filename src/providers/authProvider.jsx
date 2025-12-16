@@ -5,6 +5,7 @@ import AuthContext from "../contexts/AuthContext.js";
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
     const [apiLoaded, setApiLoaded] = useState(false);
+    const [apiJsLoaded, setApiJsLoaded] = useState({});
     const [user, setUser] = useState({});
     const [attemptedLogin, setAttemptedLogin] = useState(false);
 
@@ -57,7 +58,9 @@ const AuthProvider = ({ children }) => {
             is_admin,
             is_superuser,
             attemptedLogin,
-            setAttemptedLogin
+            setAttemptedLogin,
+            apiJsLoaded,
+            setApiJsLoaded,
         }),
         [token, user, api, apiLoaded,attemptedLogin]
     );

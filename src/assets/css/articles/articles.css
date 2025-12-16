@@ -129,6 +129,14 @@
     /*color: rgb(50,50,50,0.8);*/
     color: rgba(204, 125, 3, 0.47);
     cursor: pointer;
+    width: 100%;
+}
+
+.article-tile footer .author{
+    text-align:left;
+    position: absolute;
+    left: 0.2em;
+    bottom: 0.2em;
 }
 
 
@@ -140,4 +148,38 @@
     /*color: rgb(50,50,50,0.8);*/
     color: rgba(204, 125, 3, 0.47);
     cursor: pointer;
+}
+
+footer .likes-count{
+    right: 1rem;
+    position: absolute;
+    text-align: right;
+    bottom: 0.2rem;
+}
+
+header .like-star{
+    /*display:none;*/
+    /*color: rgb(121,221,21,0.6) !important;*/
+    /*fill-color: rgba(246, 172, 26, 0.55);*/
+    width: 2.9rem;
+    position: absolute;
+    filter:
+        drop-shadow(0.1em 0.1em 0.1em rgba(242, 205, 56, 0.48))
+        drop-shadow(0.1em 0.1em 0.1em rgba(236, 159, 24, 0.22))
+        drop-shadow(0.1em 0.1em 0.1em rgba(219, 103, 45, 0.25))
+        drop-shadow(0.2em 0.2em 0.2em rgba(245, 32, 4, 0.2));
+    right: -1.1rem;
+    top: 0.3rem;
+    color: rgba(239, 224, 200, 0.98);
+}
+
+header .like-star.liked{
+    color: rgb(255, 215, 0, 0.98);
+    filter:
+        drop-shadow(0.1em 0.1em 0.1em rgba(255, 223, 73, 0.91))
+        drop-shadow(0.1em 0.1em 0.1em rgba(255, 223, 73, 0.72))
+        drop-shadow(0.1em 0.1em 0.1em rgb(255, 223, 73,0.61))
+        drop-shadow(0.2em 0.2em 0.2em rgba(255, 223, 73, 0.8))
+        brightness(0.72)
+        contrast(428%);
 }

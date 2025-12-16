@@ -1,21 +1,23 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 // import axios from "axios";
 import useAuth from "./useAuth.js";
+import AuthContext from "../contexts/AuthContext.js";
 
 function useAPI(){
 
-    const [apiMethods,setApiMethods] = useState({})
-    const [apiLoaded, setApiLoaded] = useState(false)
+    // const [apiMethods,setApiMethods] = useState({})
+    const {apiJsLoaded:apiMethods, setApiJsLoaded:setApiMethods} = useContext(AuthContext)
     const {context} = useAuth()
     const {api, token, setUser} = context
 
     const apiAddress = import.meta.env.VITE_API_ADDRESS;
 
     async function loadApiFiles(){
+        if (Object.keys(apiMethods).length) return;
         import(`${apiAddress}orth_calendar/apijs/?v=${Date.now()}` /* @vite-ignore */).
         then(response=>{
             setApiMethods(response)
-            setApiLoaded(true)
+            // setApiLoaded(true)
         }).catch(err=>{
             console.log(err)
             throw new Error("Failed to fetch API methods")
@@ -60,7 +62,13 @@ function useAPI(){
             }))})
     }, [token]);
 
-    return {apiMethods, apiLoaded, loadNavFiles, loadApiFiles, loadArticles, getProfile}
+    useEffect(()=>{
+        if (!Object.keys(apiMethods).length){
+            loadApiFiles()
+        }
+    },[apiMethods])
+
+    return {apiMethods, apiLoaded: !!Object.keys(apiMethods).length, loadNavFiles, loadApiFiles, loadArticles, getProfile}
 
 }
 
