@@ -36,12 +36,6 @@ A full-stack flashcard learning application built with React and Django REST Fra
 - Favorite articles functionality
 - Today's liturgical content on homepage
 
-### Backend-Driven UI
-- **Navigation**: Main navigation items loaded dynamically from backend
-- **Theming**: Background colors, fonts, and styling provided by backend API
-- **Header Images**: Header images configured via backend
-- **Important**: Without backend connection, navigation will not load
-
 ### Protected Routes
 Routes are configured with `auth_required` flag to restrict access to authenticated users only.
 
@@ -112,11 +106,11 @@ fetch('/api/articles/', {
 ### Backend Dependency
 The application **requires an active backend connection** to function properly:
 - Navigation menu loads from backend API
-- Theme and styling configuration provided by backend
-- Header images served from backend
+- Theme and styling adjustments are provided by backend admin settings
+- Current header image is served dynamically from backend
 - Calendar data computed by backend engine
 
-Without backend connectivity, the application will display minimal UI with no navigation.
+Without backend connectivity, the application will display default UI with no navigation.
 
 ### Orthodox Calendar Engine
 The backend includes an automated engine that:
@@ -134,8 +128,9 @@ The domain uses Cyrillic characters (IDN - Internationalized Domain Name).
 ## Setup
 
 1. Install frontend dependencies: `npm install`
-2. Install backend dependencies: `pip install -r requirements.txt`
-3. Configure Django settings for CORS, CSRF, and calendar engine
-4. Run migrations: `python manage.py migrate`
-5. Run Django server: `python manage.py runserver`
-6. Run React dev server: `npm start`
+2. Run React dev server: `npm start`
+
+# IMPORTANT
+### If no backend is installed , the application will run by settings provided in production.env If you install the backend, you should specify local.env with the backend address (usually: http://localhost:8000)
+### backend repository: https://github.com/b-angelov/django_advanced_exam_repository.git
+### If so, you'll have to populate the database content as well, to get calendar, navigation and dynamic styling working
