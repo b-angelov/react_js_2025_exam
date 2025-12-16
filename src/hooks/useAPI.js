@@ -32,9 +32,9 @@ function useAPI(){
         }
     }
 
-    async function loadArticles(date, feast, saint, holiday, author, id){
+    async function loadArticles(date, feast, saint, holiday, author, id, favorites){
         try{
-            return await api.get(`${apiAddress}api/articles/?id=${id||""}&date=${date||""}&feast=${feast||""}&saint=${saint||""}&holiday=${holiday||""}&author=${author||""}`)
+            return await api.get(`${apiAddress}api/articles/?id=${id||""}&date=${date||""}&feast=${feast||""}&saint=${saint||""}&holiday=${holiday||""}&author=${author||""}&favorites=${favorites||""}`)
         } catch(err){
             console.log(err)
             throw new Error("Failed to fetch articles")
@@ -54,6 +54,15 @@ function useAPI(){
         }
     }
 
+    const like = async (id,likedFn,likesCountFn) =>{
+        api.post(`api/articles/${id}/like/`).then(response=>{
+            likedFn((prev)=>!prev);
+            likesCountFn(response.data.likes_count);
+        }).catch(error=>{
+            console.log(error);
+        })
+    }
+
     useEffect(() => {
         if(!token) return;
         getProfile().then(profileData=>{
@@ -68,7 +77,7 @@ function useAPI(){
         }
     },[apiMethods])
 
-    return {apiMethods, apiLoaded: !!Object.keys(apiMethods).length, loadNavFiles, loadApiFiles, loadArticles, getProfile}
+    return {apiMethods, apiLoaded: !!Object.keys(apiMethods).length, loadNavFiles, loadApiFiles, loadArticles, getProfile, like}
 
 }
 

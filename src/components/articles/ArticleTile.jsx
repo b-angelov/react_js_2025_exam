@@ -4,14 +4,16 @@ import saintImage from "../../assets/images/articles/saint.webp";
 import {LikeStar} from "../common/LikeStar.jsx";
 import {useContext, useState} from "react";
 import AuthContext from "../../contexts/AuthContext.js";
+import useAPI from "../../hooks/useAPI.js";
 
 export default function ArticleTile(props) {
 
-    const {api} = useContext(AuthContext)
+    const {api, is_authenticated} = useContext(AuthContext)
     const [liked, setLiked] = useState(props.likes?.liked_by_user || false);
     const [likes_count, setLikesCount] = useState(props.likes?.likes_count || 0);
+    const {like} = useAPI()
 
-    const like = async () =>{
+    const likee = async () =>{
         api.post(`api/articles/${props.id}/like/`).then(response=>{
             setLiked(!liked);
             setLikesCount(response.data.likes_count);
@@ -25,7 +27,10 @@ export default function ArticleTile(props) {
     return (
         <>
             <article className={"article-tile"} onClick={() => navigate(routes["article-detail"].replace(":id", id))}>
-                <header><figure onClick={(e)=>{e.stopPropagation(); like()}} title={"Харесай"}><LikeStar className={"like-star" + (liked ? " liked" : "")} /></figure></header>
+                <header>{is_authenticated && (<figure onClick={(e) => {
+                    e.stopPropagation();
+                    like(props.id, setLiked, setLikesCount)
+                }} title={"Харесай"}><LikeStar className={"like-star" + (liked ? " liked" : "")}/></figure>)}</header>
                 <figure>
                     {!!image && (<img src={image} alt={title}/>)}
                     {!image && (<img src={saintImage} alt="няма изображение"/>)}
@@ -36,11 +41,11 @@ export default function ArticleTile(props) {
                     <p>{content.slice(0,45) + "..."}</p>
                     <nav>
                         <ul>
-                            {(is_owner(author.id) || is_superuser()) && (<li><Link onClick={e=>e.stopPropagation()} to={routes["article-delete"].replace(":id", id)}>
+                            {(is_owner(author.id) || is_superuser()) && (<li><Link title={"Изтрий"} onClick={e=>e.stopPropagation()} to={routes["article-delete"].replace(":id", id)}>
                                 
                             </Link></li>)}
                             {/*{% if article.can_change or article.is_own %}*/}
-                            {(is_owner(author.id) || is_superuser() || is_admin()) && (<li><Link onClick={e=>e.stopPropagation()} to={routes["article-edit"].replace(":id", id)}>
+                            {(is_owner(author.id) || is_superuser() || is_admin()) && (<li><Link title={"Редактирай"} onClick={e=>e.stopPropagation()} to={routes["article-edit"].replace(":id", id)}>
                                 
                             </Link></li>)}
                         </ul>
@@ -48,8 +53,8 @@ export default function ArticleTile(props) {
 
                 </main>
                 <footer onClick={(e)=>{e.stopPropagation(); navigate(routes["user-profile-page"].replace(":id",author?.id))}}>
-                    <span className={"author"} >Автор: {(author?.first_name || author?.last_name) ? `${author?.first_name} ${author?.last_name}` : author?.username}</span>
-                    <span class={"likes-count"}>Брой харесвания: {likes_count}</span>
+                    <span title={"Профил на автора"} className={"author"} >Автор: {(author?.first_name || author?.last_name) ? `${author?.first_name} ${author?.last_name}` : author?.username}</span>
+                    <span title={"Брой харесвания"} className={"likes-count"}>Брой харесвания: {likes_count}</span>
                 </footer>
 
             </article>

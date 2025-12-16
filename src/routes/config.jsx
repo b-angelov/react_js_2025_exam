@@ -20,6 +20,7 @@ export const routeConfig = [
             {path: routes["home"], element: <Articles title={"Картички за днес"} date={new Date().toISOString().split('T')[0]}/>, nested:[], auth_required: false},
             {path: routes["all-articles"], element: <Articles no_cards_title={"Няма картички"} no_cards_desc={"Все още няма никакви създадени картички"}/>, nested:[], auth_required: false},
             {path: routes["user-articles"], element: <MyArticles/>, nested:[], auth_required: true},
+            {path: routes["favorite-articles"], element: <Articles favorites={true} title={"Мои любими картички"}/>, nested:[], auth_required: true},
             {path: routes["article-detail"], element: <Article/>, nested:[], auth_required: false},
             {path: routes["article-create"], element: <ArticleCreate/>, nested:[], auth_required: true},
             {path: routes["article-edit"], element: <UpdateArticle/>, nested:[], auth_required: true},

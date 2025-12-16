@@ -15,7 +15,7 @@ import TilePlaceholder from "./TilePlaceholder.jsx";
 
 export default function Articles(props) {
     const {
-        date, feast, saint, holiday, author, title, no_cards_title, no_cards_desc
+        date, feast, saint, holiday, author, title, no_cards_title, no_cards_desc, favorites
     } = props;
 
     const {loadArticles, apiMethods, apiLoaded, loadApiFiles} = useAPI();
@@ -33,7 +33,7 @@ export default function Articles(props) {
 
     useEffect(() => {
         console.log(user)
-        loadArticles(date, feast, saint, holiday, author).then(response =>{
+        loadArticles(date, feast, saint, holiday, author, null, favorites).then(response =>{
             setArticles(response.data.map(article => {
                 return <ArticleTile {...article} key={article.id} is_owner={()=>is_owner(article.author.id)} is_superuser={is_superuser} is_admin={is_admin} navigate={navigate}/>
             }))
