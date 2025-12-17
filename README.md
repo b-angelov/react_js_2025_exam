@@ -47,6 +47,9 @@ Routes are configured with `auth_required` flag to restrict access to authentica
 - **Protected routes** - Authentication-required routes with automatic redirect
 - **Dynamic UI loading** - Navigation and theme loaded from backend on mount
 - **In-memory token storage** - Access tokens stored in memory for security
+- **Error handling** - Error boundaries and API error handling
+- **Refresh token cookies** - Secure session management
+- **Hideable messages** - User feedback with dismissible alerts
 
 ## API Endpoints
 
@@ -131,6 +134,7 @@ The domain uses Cyrillic characters (IDN - Internationalized Domain Name).
 2. Run React dev server: `npm start`
 
 # IMPORTANT
-### If no backend is installed , the application will run by settings provided in production.env If you install the backend, you should specify local.env with the backend address (usually: http://localhost:8000)
+### If no backend is installed , the application will run by settings provided in production.env 
+### If you install the backend, you should specify local.env with the backend address (usually: http://localhost:8000)
 ### backend repository: https://github.com/b-angelov/django_advanced_exam_repository.git
 ### If so, you'll have to populate the database content as well, to get calendar, navigation and dynamic styling working
