@@ -50,6 +50,7 @@ Routes are configured with `auth_required` flag to restrict access to authentica
 - **Error handling** - Error boundaries and API error handling
 - **Refresh token cookies** - Secure session management
 - **Hideable messages** - User feedback with dismissible alerts
+- **Markdown support** - Articles rendered with markdown formatting
 
 ## API Endpoints
 
