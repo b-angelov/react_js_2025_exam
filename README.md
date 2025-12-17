@@ -22,12 +22,14 @@ A full-stack flashcard learning application built with React and Django REST Fra
 - Automated calculation of Orthodox holidays and liturgical dates
 - Date-based article organization following the church calendar
 - Calendar view for browsing liturgical content by date
+- TODO: Gregorian, Julian, New Julian calendar switch to be added. So backend could showcase its capabilites.
 
 ### User Management
 - User registration and authentication
 - Profile management (view, edit, delete)
 - User profiles for viewing other users
 - Session-based authentication with CSRF protection
+- **Role management** - Content aware user roles for access control (admin, superuser, user)
 
 ### Articles (Flashcards)
 - Create, read, update, and delete flashcards
@@ -51,6 +53,12 @@ Routes are configured with `auth_required` flag to restrict access to authentica
 - **Refresh token cookies** - Secure session management
 - **Hideable messages** - User feedback with dismissible alerts
 - **Markdown support** - Articles rendered with markdown formatting
+- **Responsive design** - Mobile-friendly layout and styling, yet to be polished
+- **Animations** - Smooth transitions and UI animations
+- **Custom hooks** - Reusable logic for API calls and authentication
+- **Context API** - Global state management for auth and UI settings
+- **Environment configuration** - Separate settings for development and production
+- 
 
 ## API Endpoints
 
