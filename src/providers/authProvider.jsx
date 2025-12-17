@@ -7,12 +7,13 @@ const AuthProvider = ({ children }) => {
     const [apiLoaded, setApiLoaded] = useState(false);
     const [apiJsLoaded, setApiJsLoaded] = useState({});
     const [user, setUser] = useState({});
+    const [tryLogin, setTryLogin] = useState(false);
     const [attemptedLogin, setAttemptedLogin] = useState(false);
 
 
 
     const api = useMemo(() => {
-        return axios.create({
+        const api_instance = axios.create({
             baseURL: import.meta.env.VITE_API_ADDRESS,
             headers: {
                 "Content-Type": "application/json",
@@ -20,6 +21,20 @@ const AuthProvider = ({ children }) => {
             },
             withCredentials: true,
         });
+
+        api_instance.interceptors.response.use(
+            (response) => response,
+            (error) => {
+                if (error.response && error.response.status === 401 && error.response?.code === "token_not_valid") {
+                    setToken(null);
+                    setUser({});
+                    setTryLogin(true)
+                }
+                return Promise.reject(error);
+            }
+        );
+
+        return api_instance;
     }, []);
 
     useEffect(() => {
@@ -61,8 +76,10 @@ const AuthProvider = ({ children }) => {
             setAttemptedLogin,
             apiJsLoaded,
             setApiJsLoaded,
+            tryLogin,
+            setTryLogin,
         }),
-        [token, user, api, apiLoaded,attemptedLogin]
+        [token, user, api, apiLoaded,attemptedLogin,tryLogin]
     );
 
     return (

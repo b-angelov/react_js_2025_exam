@@ -11,7 +11,6 @@ export function useForm(initialValues, submitCallback) {
     const changeHandler = (e) => {
 
         if ((e.currentTarget.type === "file") && imageRef.current && imageRef.current.files[0]) {
-            console.log(imageRef.current.files[0]);
             setValues(prev => {
                     return {
                         ...prev,

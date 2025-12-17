@@ -23,7 +23,6 @@ export default function ArticleTile(props) {
     }
 
     const {id, date, feast, saint, holiday, author, image, content, title, navigate, is_owner, is_superuser, is_admin, likes} = props
-    console.log(likes)
     return (
         <>
             <article className={"article-tile"} onClick={() => navigate(routes["article-detail"].replace(":id", id))}>

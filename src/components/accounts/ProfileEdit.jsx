@@ -31,10 +31,8 @@ export default function ProfileEdit() {
 
     const submit = (formValues)=>{
         const {first_name, last_name,email,description,image,birth_date} = formValues;
-        console.log(formValues)
         const data = {first_name, last_name,email,profile:{description, birth_date}};
         const img = {image}
-        console.log(data)
         api.patch("api/profile/my/", data)
             .then(response=>{
                 return api.patch("api/profile/my/", img, {

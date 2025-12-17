@@ -51,9 +51,7 @@ function todayFeastsAndSaints(element,pattern){
 
 function toggleDescription(){
     const description = document.querySelectorAll('#calendar-main .desc')
-    console.log(description)
     for (const desc of description.values()){
-        console.log(desc)
         if (!desc.previousElementSibling && !desc.nextElementSibling){
             desc.style.visibility = 'hidden';
         }

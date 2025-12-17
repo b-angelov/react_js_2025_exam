@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import AuthContext from "../contexts/AuthContext.js";
 // import axios, {AxiosHeaders} from "axios";
 import {jwtDecode} from "jwt-decode";
@@ -7,7 +7,7 @@ import MainContext from "../contexts/MainContext.js";
 
 export default function useAuth()  {
     const context = useContext(AuthContext);
-    const {token, setToken, api, setUser, user, setAttemptedLogin} = context;
+    const {token, setToken, api, setUser, user, setAttemptedLogin, tryLogin, setTryLogin} = context;
 
     const toggleSuccess = (success,onSuccess="",onFail="",fn=()=>{}) => {
         success ? fn(onSuccess) : fn(onFail);
@@ -89,6 +89,15 @@ export default function useAuth()  {
             return {status: 500, error}
         }).finally(()=>{setAttemptedLogin(true)});
     }
+
+    useEffect(()=>{
+        if(tryLogin){
+            (async ()=> {
+                await login();
+            })()
+            setTryLogin(false)
+        }
+    }, [tryLogin])
 
 
     return {context, login, logout, register};

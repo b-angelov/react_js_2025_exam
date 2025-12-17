@@ -13,6 +13,8 @@ import routes from "../../routes/routes.js";
 // import {Link} from "react-router";
 import MainContext from "../../contexts/MainContext.js";
 import capitalize from "../../utils/capitalize.js";
+import {ErrorBoundary} from "react-error-boundary";
+import Spinner from "./Spinner.jsx";
 
 
 export default function Base(){
@@ -217,7 +219,18 @@ export default function Base(){
                                     </div>)}
 
                                     <div className={`component-wrapper`} >
+                                        <ErrorBoundary fallbackRender={(error,reset)=>{
+                                            return (<>
+                                                <div className={"message-container" + (styleHides ? " hides" : "") + (styleAppears ? " appears" : "")}>
+                                                    {error.message}
+
+                                                </div>
+                                                <Spinner></Spinner>
+                                                </>
+                                            )
+                                        }}>
                                         <Outlet/>
+                                        </ErrorBoundary>
                                         {/*<!--{ % block main_content %}
 
                                         {% endblock %}-->*/}

@@ -119,7 +119,6 @@ export default function RenderArticleForm({method="post",id}) {
                 "Content-Type": "multipart/form-data",
             },
         }).then(response => {
-            console.log(response.data);
             if(response.status >= 200 && response.status < 300) {
                 setMessage(success);
             }else{

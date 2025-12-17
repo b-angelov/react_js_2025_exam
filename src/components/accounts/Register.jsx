@@ -27,7 +27,6 @@ export default function Register() {
     }
 
     function submit(formData){
-        console.log(formData)
         register(formData.username, formData.password1, formData.password2,setMessage).then(response=>{
             if (response.status === 201){
                 setMessage("Регистрацията е успешена!")
