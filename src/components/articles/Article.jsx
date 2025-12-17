@@ -8,6 +8,7 @@ import saintImage from "../../assets/images/articles/saint.webp";
 import routes from "../../routes/routes.js";
 import {LikeStar} from "../common/LikeStar.jsx";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function Article(props) {
     const {date, feast, saint, holiday, author, image, content, title, likes} = props
@@ -49,7 +50,7 @@ export default function Article(props) {
                     </figure>
                     <main>
                         <h2>{article.title}</h2>
-                        <p><Markdown>{article.content}</Markdown></p>
+                        <p><Markdown remarkPlugins={[remarkGfm]}>{article.content}</Markdown></p>
                         <nav>
                             <ul>
                                 {(is_owner(article?.author?.id) || is_superuser()) && (<li><Link title={"Изтрий"} to={routes["article-delete"].replace(":id", article.id)} onClick={e=>e.stopPropagation()}>
