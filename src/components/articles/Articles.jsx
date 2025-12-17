@@ -1,5 +1,5 @@
 import useAPI from "../../hooks/useAPI.js";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import useOrderedStyles from "../../hooks/useOrderedStyles.js";
 import ArticleTile from "./ArticleTile.jsx";
 import useAuth from "../../hooks/useAuth.js";
@@ -11,6 +11,7 @@ import React from "react";
 import DateCalendar from "./DateCalendar.jsx";
 import favicon from "../../assets/images/favicon.png";
 import TilePlaceholder from "./TilePlaceholder.jsx";
+import Spinner from "../common/Spinner.jsx";
 
 
 export default function Articles(props) {
@@ -21,6 +22,7 @@ export default function Articles(props) {
     const {loadArticles, apiMethods, apiLoaded, loadApiFiles} = useAPI();
     const {addStyle} = useOrderedStyles()
     const {is_authenticated, is_owner, is_superuser, is_admin, user} = useContext(AuthContext)
+    let [loading, setLoading] = useState(true)
     const [articles, setArticles] = useState([]);
     const [dayData, setDayData] = useState({});
     const navigate = useNavigate();
@@ -31,16 +33,18 @@ export default function Articles(props) {
         addStyle("/articles/articles.css", "articles")
     }, []);
 
+
+
     useEffect(() => {
         loadArticles(date, feast, saint, holiday, author, null, favorites).then(response =>{
+            setLoading(true)
             setArticles(response.data.map(article => {
                 return <ArticleTile {...article} key={article.id} is_owner={()=>is_owner(article.author.id)} is_superuser={is_superuser} is_admin={is_admin} navigate={navigate}/>
             }))
         }
-        )
-
-
-
+        ).finally(()=> {
+            setLoading(false)
+        })
 
     },[date, feast, saint, holiday, author, user]);
 
@@ -55,8 +59,11 @@ export default function Articles(props) {
         }
     }, [apiLoaded, articles])
 
+
     const final = []
     let add;
+    if (loading) {return (<Spinner/>)}
+
 
     if (is_authenticated) {
         add = (

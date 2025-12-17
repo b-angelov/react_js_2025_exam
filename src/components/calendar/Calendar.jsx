@@ -7,6 +7,7 @@ import {useIntl} from "react-intl";
 import useAPI from "../../hooks/useAPI.js";
 import DateCalendar from "../articles/DateCalendar.jsx";
 import DateText from "../common/DateText.jsx";
+import Spinner from "../common/Spinner.jsx";
 
 export default function Calendar({date: propDate}) {
 
@@ -65,7 +66,7 @@ export default function Calendar({date: propDate}) {
             {/*!--partial--*/}
             </article>
 
-            {dayData && (<React.Fragment key={"calendar-main"}><DateCalendar {...dayData}/></React.Fragment>)}
+            {Object.keys(dayData).length ? (<React.Fragment key={"calendar-main"}><DateCalendar {...dayData}/></React.Fragment>) : (<Spinner/>)}
         </CalendarContext.Provider>
     )
 }
