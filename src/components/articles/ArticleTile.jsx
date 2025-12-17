@@ -52,8 +52,8 @@ export default function ArticleTile(props) {
 
                 </main>
                 <footer onClick={(e)=>{e.stopPropagation(); navigate(routes["user-profile-page"].replace(":id",author?.id))}}>
-                    <span title={"Профил на автора"} className={"author"} >Автор: {(author?.first_name || author?.last_name) ? `${author?.first_name} ${author?.last_name}` : author?.username}</span>
-                    <span title={"Брой харесвания"} className={"likes-count"}>Брой харесвания: {likes_count}</span>
+                    <span title={`Профил на автор: ${author?.username}`} className={"author"} >Автор: {(author?.first_name || author?.last_name) ? `${author?.first_name} ${author?.last_name}` : author?.username}</span>
+                    <span title={`Брой харесвания: ${likes_count}`} className={"likes-count"}>Брой харесвания: {likes_count}</span>
                 </footer>
 
             </article>

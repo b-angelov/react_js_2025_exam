@@ -25,6 +25,7 @@ const AuthProvider = ({ children }) => {
         api_instance.interceptors.response.use(
             (response) => response,
             (error) => {
+                console.log(error.response)
                 if (error.response && error.response.status === 401 && error.response?.code === "token_not_valid") {
                     setToken(null);
                     setUser({});

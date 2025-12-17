@@ -64,8 +64,8 @@ export default function Article(props) {
                         </nav>
                     </main>
                     <footer onClick={(e)=>{e.stopPropagation(); navigate(routes["user-profile-page"].replace(":id",article?.author?.id))}}>
-                        <span title={"Профил на автора"} className={"author"}>Автор: {(article?.author?.first_name || article?.author?.last_name) ? `${article?.author?.first_name} ${article?.author?.last_name}` : article?.author?.username}</span>
-                        <span title={"Брой харесвания"} className={"likes-count"}>Брой харесвания: {likes_count}</span>
+                        <span title={`Профил на автор: ${article?.author?.username}`} className={"author"}>Автор: {(article?.author?.first_name || article?.author?.last_name) ? `${article?.author?.first_name} ${article?.author?.last_name}` : article?.author?.username}</span>
+                        <span title={`Брой харесвания: ${likes_count}`} className={"likes-count"}>Брой харесвания: {likes_count}</span>
                     </footer>
                 </article>
             </section>
