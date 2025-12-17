@@ -58,7 +58,9 @@ Routes are configured with `auth_required` flag to restrict access to authentica
 - **Custom hooks** - Reusable logic for API calls and authentication
 - **Context API** - Global state management for auth and UI settings
 - **Environment configuration** - Separate settings for development and production
-- 
+
+## Deployment using workflow
+- **Repository deployment** - Current repository supports custom deploy GitHub action workflow
 
 ## API Endpoints
 
